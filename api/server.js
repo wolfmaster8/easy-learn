@@ -3,7 +3,8 @@ const mysql = require('mysql');
 
 const app = express();
 
-const conn = mysql.createConnection({
+const conn = mysql.createPool({
+  connectionLimit: 50,
   host: 'localhost',
   user: 'root',
   password: 'root',
