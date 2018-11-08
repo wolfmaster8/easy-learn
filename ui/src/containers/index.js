@@ -1,0 +1,1 @@
+export { default as HeaderGral } from './HeaderGral';
