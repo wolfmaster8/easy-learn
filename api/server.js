@@ -3,7 +3,8 @@ const mysql = require('mysql');
 
 const app = express();
 
-const conn = mysql.createConnection({
+const conn = mysql.createPool({
+  connectionLimit: 50,
   host: 'easylearn.cfvh1qszjgl1.us-east-2.rds.amazonaws.com',
   user: 'easylearnwolf8',
   password: 'qFqp7wAAkB02',
@@ -13,7 +14,7 @@ const conn = mysql.createConnection({
   database: 'easylearn'
 });
 
-conn.connect(function(e){
+conn.getConnection(function(e){
   if(e){
     console.log(e);
   }else{
