@@ -77,4 +77,4 @@ app.get('/show/:id', function(req, res){
     res.send(rows)
   })
 });
-app.listen(3280);
+app.listen(3000);
