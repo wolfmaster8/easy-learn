@@ -3,26 +3,22 @@ const mysql = require('mysql');
 
 const app = express();
 
-const conn = mysql.createPool({
-  connectionLimit: 50,
+const conn = mysql.createConnection({
   host: 'easylearn.cfvh1qszjgl1.us-east-2.rds.amazonaws.com',
   user: 'easylearnwolf8',
   password: 'qFqp7wAAkB02',
-  // password: 'root',
   port: 3306,
-  // port: 8889,
-  queryTimeout: 6000,
   database: 'easylearn'
 });
 
-conn.getConnection(function(e){
+conn.connect(function(e){
   if(e){
     console.log(e);
   }else{
     console.log('Connected')
   }
 });
-
+/*
 app.get('/create/usuarios', function(req, res){
  const sql = "CREATE TABLE usuarios (id_usuario INT(99) NOT NULL PRIMARY KEY auto_increment, nombre VARCHAR(50), apellido VARCHAR(50), email VARCHAR(50), pwd VARCHAR(255), rol INT(99), fecha_creacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , ultima_fecha_sesion DATE)";
  conn.query(sql, (err, result)=>{
@@ -70,7 +66,7 @@ app.get('/create/avi_ins', function(req, res){
     if(err) res.send(err);
     res.send(result)
   })
-});
+});*/
 
 app.get('/show/:id', function(req, res){
   const sql = "SELECT * FROM usuarios WHERE id_usuario=?";
