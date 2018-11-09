@@ -1,21 +1,31 @@
 import React, { Component, Fragment } from 'react';
+import api from '../services/api';
 import {Layout, Card, Row, Col, Badge, Divider, Progress, Tooltip, Button} from "antd";
 const { Header, Content, Sider } = Layout;
+
 
 export default class Usuarios extends React.Component{
   constructor( props ) {
     super(props);
     this.renderNota = this.renderNota.bind(this);
     this.state = {
+      usuario:{},
       nota: false,
+      loading: true,
     }
+  }
+  async componentDidMount() {
+    const { id } = this.props.match.params;
+    const response = await api.get(`/show/${id}`);
+    this.setState({ usuario: response.data, loading: false });
+    console.log(response);
   }
   renderNota(){
     console.log('Ver nota')
     this.setState({nota: !this.state.nota});
   }
   render(){
-    const {nota} = this.state;
+    const {nota, usuario} = this.state;
     return(
       <Layout>
         <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
@@ -39,6 +49,9 @@ export default class Usuarios extends React.Component{
                   </Tooltip>
                 </Fragment>}
               </Card>
+            </Col>
+            <Col span={8}>
+            
             </Col>
           </Row>
         </Content>
