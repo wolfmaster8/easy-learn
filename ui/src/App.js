@@ -1,22 +1,22 @@
 import React, { Component, Fragment } from 'react';
 import "antd/dist/antd.css";
-import Routes from './routes';
-
+import './assets/css/main.css';
 import BrowserRouter from "react-router-dom/es/BrowserRouter";
-
-import HeaderGral from "./containers/HeaderGral";
+import {HeaderGral, FooterGral} from "./containers/";
+import Routes from "./routes";
 
 
 class App extends Component {
 
   render() {
     return (
-      <BroserRouter>
-        <Fragment>
+      <BrowserRouter>
+        <div>
           <HeaderGral/>
-
-        </Fragment>
-      </BroserRouter>
+            <Routes />
+          <FooterGral/>
+        </div>
+      </BrowserRouter>
     );
   }
 }

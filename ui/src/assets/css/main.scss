@@ -1,0 +1,33 @@
+$verde: #3BAC53;
+$verdeO: #378844;
+*{
+  font-family: 'PT Sans Caption', sans-serif;
+}
+.text-white{
+  color: white !important;
+}
+.text-center{
+  text-align: center;
+}
+.pull-right{
+  float: right;
+}
+.background-ean{
+  background: $verde;
+  ul{
+    background: $verde;
+    .ant-menu-item-selected{
+      background-color: $verdeO !important;
+    }
+  }
+
+}
+.ant-btn-primary{
+  background: $verde;
+  border-color: $verde;
+  &:hover, &:focus{
+    background: $verdeO;
+    border-color: $verdeO;
+
+  }
+}

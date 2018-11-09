@@ -1,0 +1,36 @@
+* {
+  font-family: "PT Sans Caption", sans-serif;
+}
+
+.text-white {
+  color: white !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.pull-right {
+  float: right;
+}
+
+.background-ean {
+  background: #3BAC53;
+}
+.background-ean ul {
+  background: #3BAC53;
+}
+.background-ean ul .ant-menu-item-selected {
+  background-color: #378844 !important;
+}
+
+.ant-btn-primary {
+  background: #3BAC53;
+  border-color: #3BAC53;
+}
+.ant-btn-primary:hover, .ant-btn-primary:focus {
+  background: #378844;
+  border-color: #378844;
+}
+
+/*# sourceMappingURL=main.css.map */

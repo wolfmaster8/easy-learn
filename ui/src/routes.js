@@ -5,7 +5,7 @@ import * as pages from './pages';
 const Routes = () => (
   <Fragment>
     <Switch>
-      <Router exact path="/" component={pages.Usuarios} />
+      <Route exact path="/" component={pages.Usuarios} />
       <Redirect to="/"/>
     </Switch>
   </Fragment>
