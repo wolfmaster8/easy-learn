@@ -2,10 +2,9 @@ import React from 'react';
 import Row from "antd/es/grid/row";
 import Col from "antd/es/grid/col";
 import Logo from './../assets/images/logo-horizontal.png';
-import { Layout, Menu, Breadcrumb, Icon, Avatar } from 'antd';
+import { Layout, Menu, Avatar } from 'antd';
 import Link from "react-router-dom/es/Link";
-const { SubMenu } = Menu;
-const { Header, Content, Sider } = Layout;
+const { Header} = Layout;
 
 export default class HeaderGral extends React.Component{
 
@@ -33,7 +32,7 @@ export default class HeaderGral extends React.Component{
         <Header className="header background-ean">
           <Row gutter={16}>
             <Col span={3}>
-              <img src={Logo} height="40px" />
+              <img src={Logo} height="40px" alt="Logo Universidad Ean" />
             </Col>
             <Col span={15}>
               <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} style={{lineHeight: '64px'}}>

@@ -1,8 +1,6 @@
 import React, {Component} from "react";
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
-
-const { SubMenu } = Menu;
-const { Header, Content, Footer } = Layout;
+import { Layout } from 'antd';
+const {  Footer } = Layout;
 
 
 class FooterGral extends Component{

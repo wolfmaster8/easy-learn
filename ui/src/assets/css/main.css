@@ -24,6 +24,12 @@
   background-color: #378844 !important;
 }
 
+.spin {
+  text-align: center;
+  margin-bottom: 0px;
+  padding: 30px 50px;
+}
+
 .ant-btn-primary {
   background: #3BAC53;
   border-color: #3BAC53;

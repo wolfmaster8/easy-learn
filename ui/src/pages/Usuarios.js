@@ -1,57 +1,93 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import api from '../services/api';
-import {Layout, Card, Row, Col, Badge, Divider, Progress, Tooltip, Button} from "antd";
-const { Header, Content, Sider } = Layout;
+import SpinGral from '../components/SpinGral';
+import { Layout, Row, Col, List, Button, Divider, Form, Drawer, Input, Icon } from "antd";
+import Breadcrumb from "antd/es/breadcrumb/Breadcrumb";
+import Link from "react-router-dom/es/Link";
+
+const { Content } = Layout;
+const FormItem = Form.Item;
 
 
-export default class Usuarios extends React.Component{
+export default class Usuarios extends React.Component {
   constructor( props ) {
     super(props);
-    this.renderNota = this.renderNota.bind(this);
+    this.showDrawer = this.showDrawer.bind(this);
     this.state = {
-      usuario:{},
-      nota: false,
+      data: {},
       loading: true,
     }
   }
+  
   async componentDidMount() {
-    const { id } = this.props.match.params;
-    const response = await api.get(`/show/${id}`);
-    this.setState({ usuario: response.data, loading: false });
+    // const { id } = this.props.match.params;
+    const response = await api.get(`/usuarios`);
+    this.setState({ data: response.data, loading: false });
     console.log(response);
   }
-  renderNota(){
-    console.log('Ver nota')
-    this.setState({nota: !this.state.nota});
+  
+  showDrawer = () => {
+    this.setState({ drawer: true, })
+  };
+  closeDrawer = () => {
+    this.setState({ drawer: false, })
+  };
+  
+  renderAddNewUser() {
+    return (
+      <Fragment>
+        <Drawer
+          style={{width: '400px'}}
+          title="Crear Usuario"
+          placement="right"
+          closable={true}
+          onClose={this.closeDrawer}
+          visible={this.state.drawer}
+        >
+          <Form
+            className="login-form"
+            layout="vertical"
+          >
+            <FormItem>
+              <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }}/>} placeholder="Username"/>
+            </FormItem>
+          
+          </Form>
+        </Drawer>
+      </Fragment>
+    )
+    
   }
-  render(){
-    const {nota, usuario} = this.state;
-    return(
+  
+  render() {
+    const { data, loading } = this.state;
+    const nombreCompleto = data.nombre + ' ' + data.apellido;
+    if (loading) return <SpinGral/>;
+    return (
       <Layout>
         <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
           <Row gutter={16}>
-            <Col span={8}>
-              <Card
-                title="Sistemas de Información"
-                extra={<Button type="primary" href="#">Entrar</Button>}
-              >
-                <p>Notificaciones <Badge className="pull-right" count={25} /></p>
-                <Divider />
-                <h4 className="text-center">Próxima Entrega</h4>
-                <p className="text-center"><Badge status="processing" />18 de Noviembre</p>
-                <Divider />
-                <Button type="primary" block onClick={this.renderNota} size="default">{nota ? 'Ocultar Nota' : 'Ver Nota'}</Button>
-                {nota &&
-                <Fragment>
-                  <Tooltip title="30 de 60 puntos disponibles">
-                    <h2 className="text-center">30 puntos</h2>
-                    <Progress showInfo={false} percent={60} successPercent={30} />
-                  </Tooltip>
-                </Fragment>}
-              </Card>
+            <Col span={4}>
+              <Breadcrumb style={{ margin: '16px 0' }}>
+                <Breadcrumb.Item>Home</Breadcrumb.Item>
+                <Breadcrumb.Item>List</Breadcrumb.Item>
+                <Breadcrumb.Item>App</Breadcrumb.Item>
+              </Breadcrumb>
             </Col>
             <Col span={8}>
-            
+              <Button type="primary" onClick={this.showDrawer}>Añadir Usuario</Button>
+            </Col>
+          </Row>
+          <Divider/>
+          <Row gutter={16}>
+            <Col span={24}>
+              <List itemLayout="horizontal" dataSource={data} renderItem={item => (
+                <List.Item>
+                  <List.Item.Meta title={`${item.nombre} ${item.apellido}`} description={item.email}/>
+                </List.Item>
+              )}>
+                {this.renderAddNewUser()}
+              </List>
             </Col>
           </Row>
         </Content>
