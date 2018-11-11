@@ -11,6 +11,17 @@ module.exports = {
       return res.json(rows);
     })
   },
+  async verPorUsuario(req,res){
+    const user = req.params.user;
+    const query = "SELECT * FROM cursos_inscritos_assoc WHERE id_usuario=?";
+    db.query(query,[user], (err, rows)=>{
+      if(err){
+        console.log(err);
+        res.end();
+      }
+      return res.json(rows);
+    })
+  },
   async create(req, res){
     const data = req.body;
     const query = "INSERT INTO cursos_inscritos_assoc SET ?";

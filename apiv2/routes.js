@@ -56,7 +56,8 @@ router.delete('/mensajes/eliminar/:id', Mensajes.delete);
 /* ASOCIACIONES*/
 /* USUARIO -> CURSO */
 const UsuarioCurso = require('./controllers/asociaciones/UsuarioCurso');
-router.get('/usuario/:user/cursos/', UsuarioCurso.index);
+router.get('/usuarios/cursos/', UsuarioCurso.index);
+router.get('/usuario/:user/cursos/', UsuarioCurso.verPorUsuario);
 router.post('/usuario/:user/curso/', UsuarioCurso.create);
 router.post('/usuario/:user/curso/:asoc/update', UsuarioCurso.update);
 router.delete('/usuario/:user/curso/:asoc', UsuarioCurso.delete);
