@@ -1,14 +1,13 @@
 import React, { Fragment } from 'react';
 import api from '../services/api';
 import {Layout, Card, Row, Col, Badge, Divider, Progress, Tooltip, Button} from "antd";
+import CursoInfo from "../components/CursoInfo";
 const { Content } = Layout;
 
 
 export default class Cursos extends React.Component{
   constructor( props ) {
     super(props);
-    this.renderNota = this.renderNota.bind(this);
-    this.renderInfoCursos = this.renderInfoCursos.bind(this);
     this.state = {
       cursos: [],
       usuario:{},
@@ -19,47 +18,19 @@ export default class Cursos extends React.Component{
   async componentDidMount() {
     const { id } = this.props.match.params;
     const cursos = await api.get(`/usuario/${id}/cursos`);
-    this.setState({ cursos: response.data});
-    this.renderInfoCursos();
+    this.setState({ cursos: cursos.data});
   }
-  renderInfoCursos = async e =>{
-    const {cursos} = this.state;
-    return(
-      {cursos.map((curso)=>{
-      
-      })}
-    )
-  }
-  renderNota(){
-    console.log('Ver nota')
-    this.setState({nota: !this.state.nota});
-  }
+
+  
   render(){
-    const {nota, usuario} = this.state;
+    const { cursos} = this.state;
     return(
       <Layout>
         <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
           <Row gutter={16}>
-            <Col span={8}>
-              <Card
-                title="Sistemas de Información"
-                extra={<Button type="primary" href="#">Entrar</Button>}
-              >
-                <p>Notificaciones <Badge className="pull-right" count={25} /></p>
-                <Divider />
-                <h4 className="text-center">Próxima Entrega</h4>
-                <p className="text-center"><Badge status="processing" />18 de Noviembre</p>
-                <Divider />
-                <Button type="primary" block onClick={this.renderNota} size="default">{nota ? 'Ocultar Nota' : 'Ver Nota'}</Button>
-                {nota &&
-                <Fragment>
-                  <Tooltip title="30 de 60 puntos disponibles">
-                    <h2 className="text-center">30 puntos</h2>
-                    <Progress showInfo={false} percent={60} successPercent={30} />
-                  </Tooltip>
-                </Fragment>}
-              </Card>
-            </Col>
+            {cursos.map(curso =>(
+              <CursoInfo key={curso.id} info={curso}/>
+            ))}
             <Col span={8}>
             
             </Col>

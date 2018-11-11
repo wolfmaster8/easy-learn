@@ -7,7 +7,7 @@ const Routes = () => (
     <Switch>
       <Route exact path="/" component={pages.Demo}/>
       <Route path="/usuarios" component={pages.Usuarios}/>
-      <Route path="/cursos" component={pages.Cursos}/>
+      <Route path="/cursos/:id" component={pages.Cursos}/>
       <Redirect to="/"/>
     </Switch>
   </Fragment>

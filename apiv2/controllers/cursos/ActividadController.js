@@ -2,8 +2,9 @@ const db = require('../../dbconnection');
 
 module.exports = {
   async index(req,res){
-    const query = "SELECT * FROM actividad";
-    db.query(query, (err, rows, fields)=>{
+    const curso = req.params.curso;
+    const query = "SELECT * FROM actividad WHERE id_curso=?";
+    db.query(query,[curso], (err, rows, fields)=>{
       if(err){
         console.log(err);
         res.end()

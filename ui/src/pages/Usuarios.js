@@ -3,9 +3,9 @@ import api from '../services/api';
 import SpinGral from '../components/SpinGral';
 import { Layout, Row, Col, List, Button, Divider, Form, Drawer, Input, Icon } from "antd";
 import Breadcrumb from "antd/es/breadcrumb/Breadcrumb";
-import Link from "react-router-dom/es/Link";
+// import Link from "react-router-dom/es/Link";
 import hash from 'password-hash';
-import socket from 'socket.io-client';
+// import socket from 'socket.io-client';
 import UsuarioInfo from "../components/UsuarioInfo";
 const { Content } = Layout;
 
