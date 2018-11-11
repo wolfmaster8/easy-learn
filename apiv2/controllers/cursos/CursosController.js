@@ -12,7 +12,7 @@ module.exports = {
     })
   },
   async show(req, res){
-    const id = req.params.curso;
+    const id = req.params.id;
     const query = "SELECT * FROM cursos WHERE id_curso=?";
     db.query(query, [id], (err, rows, fields)=>{
       return res.json(rows);

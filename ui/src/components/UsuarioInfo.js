@@ -7,13 +7,14 @@ export default class UsuarioInfo extends Component{
   constructor( props ) {
     super(props);
     this.state = {
-      cursos: {}
+      cursos: []
     }
   }
   
   async componentDidMount(){
-    const response = await api.get(`/usuario/${this.props.id_usuario}/cursos`);
-    this.setState({cursos: response.data[0]});
+    const {user} = this.props;
+    const response = await api.get(`/usuario/${user.id_usuario}/cursos`);
+    this.setState({cursos: response.data});
     console.log(this.state.cursos)
   }
   deleteUser = async () => {
@@ -27,7 +28,9 @@ export default class UsuarioInfo extends Component{
     return(
       <List.Item actions={[ <Link to={`/usuario/editar/${user.id_usuario}`}>Editar</Link>, <Button onClick={this.deleteUser} type="default">Eliminar</Button> ]}>
         <List.Item.Meta title={`${user.nombre} ${user.apellido}`} description={user.email}/>
-        {console.log('-->'+cursos+' id:'+user.id_usuario)}
+        {cursos.map(curso =>(
+          <p>{curso.id_curso}</p>
+        ))}
       </List.Item>
     )
   }

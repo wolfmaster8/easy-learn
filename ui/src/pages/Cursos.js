@@ -8,7 +8,9 @@ export default class Cursos extends React.Component{
   constructor( props ) {
     super(props);
     this.renderNota = this.renderNota.bind(this);
+    this.renderInfoCursos = this.renderInfoCursos.bind(this);
     this.state = {
+      cursos: [],
       usuario:{},
       nota: false,
       loading: true,
@@ -16,9 +18,17 @@ export default class Cursos extends React.Component{
   }
   async componentDidMount() {
     const { id } = this.props.match.params;
-    const response = await api.get(`/show/${id}`);
-    this.setState({ usuario: response.data, loading: false });
-    console.log(response);
+    const cursos = await api.get(`/usuario/${id}/cursos`);
+    this.setState({ cursos: response.data});
+    this.renderInfoCursos();
+  }
+  renderInfoCursos = async e =>{
+    const {cursos} = this.state;
+    return(
+      {cursos.map((curso)=>{
+      
+      })}
+    )
   }
   renderNota(){
     console.log('Ver nota')
