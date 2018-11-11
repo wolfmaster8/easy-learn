@@ -1,10 +1,7 @@
 # easy-learn
-EasyLearn App
+EasyLearn App por Felipe Lobo & Alexis Chacón & Sergio Barón
 
-## Run Api
-`npx nodemon`
-### URI API
-`localhost:3280`
+## Características
+Este proyecto se compone de dos carpetas: `API` y `UI`. La API, provee las rutas para accesar a la base de datos. 
+La base de datos se encuentra almacenada en RDS de Amazon Web Services.
 
-##LogIn API
-`ssh -i ~/.ssh/easy.pem ubuntu@ec2-18-222-7-124.ast-2.compute.amazonaws.com`
