@@ -1,17 +1,18 @@
-const db = require('../dbconnection');
+const db = require('../../dbconnection');
 
 module.exports = {
   async index(req,res){
     const query = "SELECT * FROM cursos";
     db.query(query, (err, rows, fields)=>{
       if(err){
-        console.log(err)
+        console.log(err);
+        res.end();
       }
       return res.json(rows);
     })
   },
   async show(req, res){
-    const id = req.params.id;
+    const id = req.params.curso;
     const query = "SELECT * FROM cursos WHERE id_curso=?";
     db.query(query, [id], (err, rows, fields)=>{
       return res.json(rows);
@@ -28,7 +29,7 @@ module.exports = {
     })
   },
   async update(req, res){
-    const id = req.params.id;
+    const id = req.params.curso;
     const dataUpdate = req.body;
     const query = "UPDATE cursos SET ? WHERE id_curso=?";
     db.query(query,[dataUpdate, id], (err, rows, fields)=>{
@@ -39,7 +40,7 @@ module.exports = {
     })
   },
   async delete(req, res){
-    const id = req.params.id;
+    const id = req.params.curso;
     const query = "DELETE FROM cursos WHERE id_curso=?"
     db.query(query, [id], (err, rows)=>{
       return res.send(rows);

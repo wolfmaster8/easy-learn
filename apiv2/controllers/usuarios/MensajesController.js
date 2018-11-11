@@ -3,7 +3,7 @@ const db = require('../../dbconnection');
 module.exports = {
   async enviados(req,res){
     const remitente = req.params.remi;
-    const query = "SELECT * FROM mensajes WHERE id_remitente=?";
+    const query = "SELECT * FROM mensajes WHERE id_remitente=? ORDER BY fecha_creacion DESC";
     db.query(query,[remitente], (err, rows)=>{
       if(err){
         console.log(err);
@@ -15,7 +15,7 @@ module.exports = {
   async recibidos(req, res){
     const destinatario = req.params.dest;
     const remitente = req.params.remi;
-    const query = "SELECT * FROM mensajes WHERE id_destinatario=?  AND id_remitente=?";
+    const query = "SELECT * FROM mensajes WHERE id_destinatario=?  AND id_remitente=? ORDER BY fecha_creacion DESC";
     db.query(query, [destinatario, remitente], (err, rows)=>{
       return res.json(rows);
     })

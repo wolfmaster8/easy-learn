@@ -1,49 +1,45 @@
 const db = require('../../dbconnection');
 
 module.exports = {
-  async index(req,res){
-    const query = "SELECT * FROM actividad";
-    db.query(query, (err, rows, fields)=>{
+  async verNotasTodas(req,res){
+    const usuario = req.params.user;
+    const query = "SELECT * FROM actividad_estudiante WHERE id_usuario=?";
+    db.query(query,[usuario], (err, rows)=>{
       if(err){
         console.log(err);
-        res.end()
+        res.end();
       }
       return res.json(rows);
     })
   },
-  async show(req, res){
-    const id = req.params.act;
-    const query = "SELECT * FROM actividad WHERE id_actividad=?";
-    db.query(query, [id], (err, rows, fields)=>{
+  async verNota(req, res){
+    const usuario = req.params.user;
+    const id = req.params.id;
+    const query = "SELECT * FROM actividad_estudiante WHERE id_act_est=? AND id_usuario=?";
+    db.query(query, [id, usuario], (err, rows)=>{
       return res.json(rows);
     })
   },
-  async create(req, res){
+  async asignarNota(req, res){
     const data = req.body;
-    const query = "INSERT INTO actividad SET ?";
-    db.query(query, [data], (err, rows, fields)=>{
+    const query = "INSERT INTO actividad_estudiante SET ?";
+    db.query(query, [data], (err, rows)=>{
       if(err){
-        console.log('Error Salvando')
+        console.log('Error Salvando '+err);
+        res.end();
       }
     return res.send(rows)
     })
   },
-  async update(req, res){
-    const id = req.params.act;
+  async editarNota(req, res){
+    const id = req.params.id;
     const dataUpdate = req.body;
-    const query = "UPDATE actividad SET ? WHERE id_actividad=?";
-    db.query(query,[dataUpdate, id], (err, rows, fields)=>{
+    const query = "UPDATE actividad_estudiante SET ? WHERE id_act_est=?";
+    db.query(query,[dataUpdate, id], (err, rows)=>{
       if(err){
         res.send(err)
       }
       return res.send(rows);
     })
   },
-  async delete(req, res){
-    const id = req.params.act;
-    const query = "DELETE FROM actividad WHERE id_actividad=?"
-    db.query(query, [id], (err, rows)=>{
-      return res.send(rows);
-    })
-  }
 };
