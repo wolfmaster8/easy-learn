@@ -13,9 +13,12 @@ export default class Usuarios extends React.Component {
   constructor( props ) {
     super(props);
     this.showDrawer = this.showDrawer.bind(this);
+/*    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);*/
     this.state = {
       data: {},
       loading: true,
+      nombre: '',
     }
   }
   
@@ -32,12 +35,19 @@ export default class Usuarios extends React.Component {
   closeDrawer = () => {
     this.setState({ drawer: false, })
   };
-  
+/*  handleChange(event){
+    this.state({
+      nombre: event.target.nombre
+    })
+  }*/
+ /* handleSubmit(e){
+    e.preventDefault();
+    
+  }*/
   renderAddNewUser() {
     return (
       <Fragment>
         <Drawer
-          style={{width: '400px'}}
           title="Crear Usuario"
           placement="right"
           closable={true}
@@ -47,11 +57,20 @@ export default class Usuarios extends React.Component {
           <Form
             className="login-form"
             layout="vertical"
+            onSubmit={this.handleSubmit()}
           >
-            <FormItem>
-              <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }}/>} placeholder="Username"/>
+            <FormItem label="Nombre">
+              <Input onChange={this.handleChange()} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }}/>} />
             </FormItem>
-          
+            <FormItem label="Apellido">
+              <Input prefix={<Icon type="team" style={{ color: 'rgba(0,0,0,.25)' }}/>} />
+            </FormItem>
+            <FormItem label="Email">
+              <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }}/>} />
+            </FormItem>
+            <FormItem>
+              <Button type="primary" htmlType="submit">Crear</Button>
+            </FormItem>
           </Form>
         </Drawer>
       </Fragment>
@@ -82,11 +101,11 @@ export default class Usuarios extends React.Component {
           <Row gutter={16}>
             <Col span={24}>
               <List itemLayout="horizontal" dataSource={data} renderItem={item => (
-                <List.Item>
+                <List.Item actions={[<Link to={`/usuario/editar/${item.id_usuario}`}>Editar</Link>]}>
                   <List.Item.Meta title={`${item.nombre} ${item.apellido}`} description={item.email}/>
                 </List.Item>
               )}>
-                {this.renderAddNewUser()}
+                {/*{this.renderAddNewUser()}*/}
               </List>
             </Col>
           </Row>

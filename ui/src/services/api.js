@@ -1,5 +1,5 @@
 import axios from 'axios';
 
-const api = axios.create({ baseURL: 'http://localhost:3280/api'});
+const api = axios.create({ baseURL: 'http://apieasylearn.sierra9.com/api'});
 
 export default api;

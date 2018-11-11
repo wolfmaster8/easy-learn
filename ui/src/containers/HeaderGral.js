@@ -32,7 +32,9 @@ export default class HeaderGral extends React.Component{
         <Header className="header background-ean">
           <Row gutter={16}>
             <Col span={3}>
-              <img src={Logo} height="40px" alt="Logo Universidad Ean" />
+              <Link to="/">
+                <img src={Logo} height="40px" alt="Logo Universidad Ean" />
+              </Link>
             </Col>
             <Col span={15}>
               <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} style={{lineHeight: '64px'}}>
