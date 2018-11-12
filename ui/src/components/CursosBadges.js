@@ -17,12 +17,15 @@ export default class CursosBadges extends Component{
     this.setState({cursoInfo: curso.data[0], loading: false});
     // console.log(this.state.cursoInfo)
   }
+
+
   
   render(){
     const {cursoInfo, loading} = this.state;
     return(
       <Fragment>
-        {cursoInfo.length ? 'No hay cursos asignados' : <Badge  count={cursoInfo.titulo} style={{backgroundColor: "#52c41a", marginRight: 10}}/>}
+        {console.log(cursoInfo.length)}
+        {!cursoInfo ? 'No hay cursos asignados' : <Badge  count={cursoInfo.titulo} style={{backgroundColor: "#3BAC53", marginRight: 10}}/>}
       
       </Fragment>
     )

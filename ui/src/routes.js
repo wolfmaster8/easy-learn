@@ -6,7 +6,7 @@ const Routes = () => (
   <Fragment>
     <Switch>
       <Route exact path="/" component={pages.Demo}/>
-      <Route path="/usuarios" component={pages.Usuarios}/>
+      <Route exact path="/usuarios" component={pages.Usuarios}/>
       <Route path="/usuario/:id/asignar/cursos" component={pages.AsignarCursos}/>
       <Route exact path="/cursos" component={pages.Cursos}/>
       <Route path="/cursos/new" component={pages.CursoAdd}/>
