@@ -11,14 +11,14 @@ export default class HeaderGral extends React.Component{
   render(){
     const menu = [
       {
-        title: 'Mis Cursos',
-        to: '/',
+        title: 'Usuarios',
+        to: '/usuarios',
         disabled: false,
       },
       {
-        title: 'Actividades Pendientes',
-        to: '/',
-        disabled: true,
+        title: 'Cursos',
+        to: '/cursos',
+        disabled: false,
       },
       {
         title: 'Mensajes',
@@ -27,6 +27,7 @@ export default class HeaderGral extends React.Component{
       },
       
     ];
+    const nombre = localStorage.getItem('@EasyLearn:phraseDemo');
     return(
       <Layout>
         <Header className="header background-ean">
@@ -45,7 +46,7 @@ export default class HeaderGral extends React.Component{
               </Menu>
             </Col>
             <Col span={6}>
-              <Avatar icon="user" /> <span className="text-white">Felipe Lobo</span>
+              <Avatar icon="user" /> <span className="text-white">{nombre ? nombre : 'Usuario'}</span>
             </Col>
           </Row>
 

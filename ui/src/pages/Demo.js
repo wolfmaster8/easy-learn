@@ -1,9 +1,6 @@
 import React from 'react';
-import { Button, Layout } from 'antd';
-import Form from "antd/es/form/Form";
-import Input from "antd/es/input/Input";
-import Row from "antd/es/grid/row";
-import Col from "antd/es/grid/col";
+import { Button, Layout, Form, Input, Row, Col, Alert } from 'antd';
+
 
 const Content = Layout.Content;
 
@@ -19,17 +16,18 @@ export default class Demo extends React.Component {
   }
   handleEnter = e => {
     if(e.keyCode !== 13) return;
-    const enter = 13;
-    this.handleSubmit(e, enter);
-  };
-  handleSubmit = (e,enter) => {
-    if(!enter){e.preventDefault()};
     const { phraseDemo } = this.state;
     if(!phraseDemo.length) return;
-    
     localStorage.setItem('@EasyLearn:phraseDemo', phraseDemo);
-    
-    this.props.history.push('/cursos');
+  
+    this.props.history.push('/usuarios');
+  };
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { phraseDemo } = this.state;
+    if(!phraseDemo.length) return;
+    localStorage.setItem('@EasyLearn:phraseDemo', phraseDemo);
+    this.props.history.push('/usuarios');
     
   };
   handleChange = e => {
@@ -45,10 +43,14 @@ export default class Demo extends React.Component {
           <p>Este es el prototipo de EasyLearn, una plataforma para profesores y estudiantes.</p>
           <p>A continuación ingresa tu nombre</p>
           <Row gutter={16}>
+
             <Col span={6}>
+
               <Form onSubmit={this.handleSubmit}>
-                <Input value={phraseDemo} onChange={this.handleChange} placeholder="Nombre" onKeyDown={this.handleEnter} />
+                <Input autoFocus={true} value={phraseDemo} onChange={this.handleChange} placeholder="Nombre" onKeyDown={this.handleEnter} />
                 <br/>
+        <Alert style={{marginTop: '30px'}} message="Este proyecto aún está en fase alfa" type="warning" showIcon />
+
                 <Button style={{marginTop: 20}} htmlType="submit" type="primary">Entrar</Button>
               </Form>
             </Col>

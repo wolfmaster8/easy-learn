@@ -7,6 +7,7 @@ import Breadcrumb from "antd/es/breadcrumb/Breadcrumb";
 import hash from 'password-hash';
 // import socket from 'socket.io-client';
 import UsuarioInfo from "../components/UsuarioInfo";
+import CursosAutocomplete from "../components/CursosAutocomplete";
 const { Content } = Layout;
 
 
@@ -89,6 +90,9 @@ export default class Usuarios extends React.Component {
               <Input name="nombre" onChange={this.handleChange} value={nombre}
                      prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }}/>}/>
             </Form.Item>
+           {/*  <Form.Item>
+              <CursosAutocomplete />
+            </Form.Item> */}
             
             <Form.Item label="Apellido">
               <Input name="apellido" onChange={this.handleChange} value={apellido}
@@ -109,7 +113,6 @@ export default class Usuarios extends React.Component {
   
   render() {
     const { data, loading } = this.state;
-    const nombreCompleto = data.nombre + ' ' + data.apellido;
     if (loading) return <SpinGral/>;
     return (
       <Layout>
