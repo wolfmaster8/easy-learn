@@ -1,28 +1,29 @@
 import React, { Fragment } from 'react';
 import api from '../services/api';
 import SpinGral from '../components/SpinGral';
-import { Layout, Row, Col, List, Button, Divider, Form, Drawer, Input, Icon } from "antd";
+import { Layout, Row, Col, List, Button, Divider, Form, Drawer, Input, Icon, Select } from "antd";
 import Breadcrumb from "antd/es/breadcrumb/Breadcrumb";
 // import Link from "react-router-dom/es/Link";
 import hash from 'password-hash';
 // import socket from 'socket.io-client';
 import UsuarioInfo from "../components/UsuarioInfo";
 import CursosAutocomplete from "../components/CursosAutocomplete";
+import * as ReactDOM from "react";
+import UsuarioForm from "../components/forms/UsuarioForm";
 const { Content } = Layout;
-
+const Option = Select.Option;
 
 export default class Usuarios extends React.Component {
   constructor( props ) {
     super(props);
     this.showDrawer = this.showDrawer.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.state = {
       data: {},
       loading: true,
       nombre: '',
       apellido: '',
-      email: ''
+      email: '',
+      rol: 2,
     }
   }
   
@@ -36,6 +37,7 @@ export default class Usuarios extends React.Component {
   async fetchData(){
     const response = await api.get(`/usuarios`);
     this.setState({ data: response.data, loading: false });
+
   }
   /* subscribeToEvents = () =>{
     const io = socket('http://apieasylearn.sierra9.com/api');
@@ -55,22 +57,29 @@ export default class Usuarios extends React.Component {
     this.setState({ drawer: false, })
   };
   handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    /*this.setState(
+      { rol: e.target.value,
+        },
+
+      );*/
+    // console.log(e.target)
   };
-  handleSubmit = async e => {
+  /*handleSubmit = async e => {
     e.preventDefault();
     const { nombre, apellido, email } = this.state;
-    const rol = 1;
+    const rol = this.state.rol;
     const pwdInput = "astr34rtgr";
     const pwd = hash.generate(pwdInput);
     const insertar = {nombre, apellido, email, rol, pwd};
     await api.post('/usuario', insertar);
-    this.setState({nombre: '', apellido: '', email: ''});
+    this.setState({nombre: '', apellido: '', email: '', rol: 2});
     this.setState({data: [insertar, ...this.state.data]})
-  };
+  };*/
+
+
   
   renderAddNewUser() {
-    const { nombre, apellido, email } = this.state;
+    const { nombre, apellido, email, rol } = this.state;
     return (
       <Fragment>
         <Drawer
@@ -80,31 +89,7 @@ export default class Usuarios extends React.Component {
           onClose={this.closeDrawer}
           visible={this.state.drawer}
         >
-          <Form
-            className="login-form"
-            layout="vertical"
-            onSubmit={this.handleSubmit}
-          >
-            <Form.Item label="Nombre">
-              
-              <Input name="nombre" onChange={this.handleChange} value={nombre}
-                     prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }}/>}/>
-            </Form.Item>
-           {/*  <Form.Item>
-              <CursosAutocomplete />
-            </Form.Item> */}
-            
-            <Form.Item label="Apellido">
-              <Input name="apellido" onChange={this.handleChange} value={apellido}
-                     prefix={<Icon type="team" style={{ color: 'rgba(0,0,0,.25)' }}/>}/>
-            </Form.Item>
-            <Form.Item label="Email">
-              <Input name="email" onChange={this.handleChange} value={email}
-                     prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }}/>}/>
-            </Form.Item>
-            <Button style={{ marginTop: 20 }} type="primary" htmlType="submit">Crear</Button>
-          
-          </Form>
+          <UsuarioForm/>
         </Drawer>
       </Fragment>
     )
