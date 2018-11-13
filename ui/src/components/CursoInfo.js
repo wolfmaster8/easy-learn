@@ -20,7 +20,6 @@ export default class CursoInfo extends Component{
         this.setState({cursoInfo: cursos});
         const actividades = await api.get(`/curso/${cursos.id_curso}/actividades`);
         this.setState({actividades: actividades.data, loadingAct: false});
-        console.log(this.state.actividades)
       }else{
     const {id_curso} = this.props.info;
 
@@ -41,7 +40,7 @@ export default class CursoInfo extends Component{
     const {nota, cursoInfo, actividades, loadingAct} = this.state;
     return(
       <Fragment>
-        <Col span={8}>
+        <Col span={8} style={{marginBottom: 40}}>
           <Card
             loading={loadingAct}
             title={cursoInfo.titulo ? cursoInfo.titulo : <Skeleton/>}

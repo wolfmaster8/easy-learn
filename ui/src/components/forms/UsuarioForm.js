@@ -1,17 +1,32 @@
-import React, {Component} from 'react';
-import { Button, Form, Icon, Input, Select } from "antd";
+import React from 'react';
+import { Button, Form, Icon, Input, Select, message } from "antd";
+import api from '../../services/api';
+import hash from 'password-hash';
+
 const Option = Select.Option;
 
  class UsuarioForm extends React.Component{
 
-  handleSubmit = (e) => {
+   handleSubmit = async e => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    await this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        const pwdInput = "astr34rtgr";
+        values["pwd"] = hash.generate(pwdInput);
+        console.log(values);
+        api.post('/usuario', values);
+        this.successGuardando();
+      }else{
+        this.errorGuardando();
       }
     });
   };
+  successGuardando = () => {
+    message.success('Usuario Guardado con éxito');
+  };
+   errorGuardando = () =>{
+     message.error('Error Guardando');
+   };
 
   render(){
     const { getFieldDecorator } = this.props.form;
@@ -31,10 +46,10 @@ const Option = Select.Option;
         </Form.Item>
 
         <Form.Item label="Rol">
-          {getFieldDecorator('rol',{defaultValue: '2',
+          {getFieldDecorator('rol',{initialValue: '2',
             rules: [{ required: true, message: 'Elige el Rol' }],
           })(
-              <Select defaultValue="Elegir Rol..." >
+              <Select  >
                 <Option value="1">Administrador</Option>
                 <Option value="2">Estudiante</Option>
                 <Option value="3">Profesor</Option>

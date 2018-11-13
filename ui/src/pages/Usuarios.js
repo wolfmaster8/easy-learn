@@ -4,7 +4,6 @@ import SpinGral from '../components/SpinGral';
 import { Layout, Row, Col, List, Button, Divider, Form, Drawer, Input, Icon, Select } from "antd";
 import Breadcrumb from "antd/es/breadcrumb/Breadcrumb";
 // import Link from "react-router-dom/es/Link";
-import hash from 'password-hash';
 // import socket from 'socket.io-client';
 import UsuarioInfo from "../components/UsuarioInfo";
 import CursosAutocomplete from "../components/CursosAutocomplete";
@@ -37,7 +36,6 @@ export default class Usuarios extends React.Component {
   async fetchData(){
     const response = await api.get(`/usuarios`);
     this.setState({ data: response.data, loading: false });
-
   }
   /* subscribeToEvents = () =>{
     const io = socket('http://apieasylearn.sierra9.com/api');
@@ -79,7 +77,6 @@ export default class Usuarios extends React.Component {
 
   
   renderAddNewUser() {
-    const { nombre, apellido, email, rol } = this.state;
     return (
       <Fragment>
         <Drawer
@@ -105,9 +102,9 @@ export default class Usuarios extends React.Component {
           <Row gutter={16}>
             <Col span={4}>
               <Breadcrumb style={{ margin: '16px 0' }}>
-                <Breadcrumb.Item>Home</Breadcrumb.Item>
-                <Breadcrumb.Item>List</Breadcrumb.Item>
-                <Breadcrumb.Item>App</Breadcrumb.Item>
+                <Breadcrumb.Item>Inicio</Breadcrumb.Item>
+                <Breadcrumb.Item>Administrador</Breadcrumb.Item>
+                <Breadcrumb.Item>Usuarios</Breadcrumb.Item>
               </Breadcrumb>
             </Col>
             <Col span={8}>

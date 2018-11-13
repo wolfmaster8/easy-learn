@@ -42,7 +42,7 @@ export default class Cursos extends React.Component{
                 <Breadcrumb.Item>Cursos</Breadcrumb.Item>
               </Breadcrumb>
             </Col>
-            <Col span={8}>
+            <Col span={8} >
              <Link to="/cursos/new"><Button type="primary">Añadir Curso</Button></Link>
             </Col>
           </Row>

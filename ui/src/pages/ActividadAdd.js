@@ -17,20 +17,34 @@ import {
   Input, Icon,
 } from "antd";
 import SpinGral from "../components/SpinGral";
-import CursoAddForm from "../components/forms/CursoAddForm";
+import ActividadAddForm from "../components/forms/ActividadAddForm";
 
 const {TextArea} = Input;
 
 const { Content } = Layout;
 const Step = Steps.Step;
 
-export default class CursoAdd extends React.Component {
+export default class ActividadAdd extends React.Component {
+  constructor(props) {
+    super(props);
+    this.id = props.match.params.id;
+    this.state = {
+      infoCurso: {}
+    }
+  }
+
+  async componentDidMount(){
+  const idCurso = this.id;
+  const response = await api.get(`/curso/${idCurso}`);
+  this.setState({infoCurso: response.data[0]});
+  console.log(this.state.infoCurso)
+}
 
 handleChange(){
 
 }
   render() {
-
+  const {infoCurso} = this.state;
     return (
       <Layout>
         <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
@@ -40,7 +54,8 @@ handleChange(){
                 <Breadcrumb.Item>Inicio</Breadcrumb.Item>
                 <Breadcrumb.Item>Administrador</Breadcrumb.Item>
                 <Breadcrumb.Item><Link to="/cursos">Cursos</Link></Breadcrumb.Item>
-                <Breadcrumb.Item>Nuevo</Breadcrumb.Item>
+                <Breadcrumb.Item>{infoCurso.titulo}</Breadcrumb.Item>
+                <Breadcrumb.Item><Link to="/cursos">Actividades</Link></Breadcrumb.Item>
               </Breadcrumb>
             </Col>
 
@@ -48,14 +63,14 @@ handleChange(){
           <Divider/>
           <Row gutter={16}>
             {/*<Col span={24} style={{marginBottom: 20}}>
-              <Steps size="small" current={0}>
+              <Steps size="small" current={1}>
                 <Step title="Datos Principales"/>
                 <Step title="Actividades"/>
                 <Step title="Subactividades"/>
               </Steps>
             </Col>*/}
             <Col span={24}>
-              <CursoAddForm/>
+              <ActividadAddForm/>
             </Col>
 
           </Row>

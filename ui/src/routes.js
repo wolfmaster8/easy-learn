@@ -10,6 +10,7 @@ const Routes = () => (
       <Route path="/usuario/:id/asignar/cursos" component={pages.AsignarCursos}/>
       <Route exact path="/cursos" component={pages.Cursos}/>
       <Route path="/cursos/new" component={pages.CursoAdd}/>
+      <Route path="/cursos/:id/actividades" component={pages.ActividadAdd}/>
       <Route path="/cursos/usuario/:id" component={pages.CursoUsuario}/>
       <Redirect to="/"/>
     </Switch>
