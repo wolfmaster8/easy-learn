@@ -7,6 +7,7 @@ router.get('/usuario/:user', UsuariosController.show);
 router.post('/usuario/', UsuariosController.create);
 router.post('/usuario/:user/update', UsuariosController.update);
 router.delete('/usuario/:user', UsuariosController.delete);
+router.get('/usuario/rol/:rol', UsuariosController.showPorRol);
 
 const CursosController = require('./controllers/cursos/CursosController');
 router.get('/cursos', CursosController.index);

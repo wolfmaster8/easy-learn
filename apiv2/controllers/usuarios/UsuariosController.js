@@ -18,6 +18,13 @@ module.exports = {
       return res.json(rows);
     })
   },
+  async showPorRol(req, res){
+    const rol = req.params.rol;
+    const query = "SELECT * FROM usuarios WHERE rol=?";
+    db.query(query, [rol], (err, rows)=>{
+      return res.json(rows);
+    })
+  },
   async create(req, res){
     const data = req.body;
     const query = "INSERT INTO usuarios SET ?";

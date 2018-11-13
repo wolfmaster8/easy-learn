@@ -14,9 +14,11 @@ import {
   Skeleton,
   Breadcrumb,
   Steps,
-  Input
+  Input,
 } from "antd";
 import SpinGral from "../components/SpinGral";
+
+const {TextArea} = Input;
 
 const { Content } = Layout;
 const Step = Steps.Step;
@@ -58,6 +60,10 @@ handleChange(){
                      <label>Titulo del Curso</label>
                      <Input autoFocus={true} onChange={this.handleChange} placeholder="Titulo"/>
                    </Form.Item>
+                    <Form.Item>
+                      <label>Descripción</label>
+                      <TextArea rows={4} onChange={this.handleChange} placeholder="Descripción"/>
+                    </Form.Item>
                   </Col>
                 </Row>
               </Form>
