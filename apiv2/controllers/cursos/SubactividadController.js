@@ -24,7 +24,7 @@ module.exports = {
     const query = "INSERT INTO subactividad SET ?";
     db.query(query, [data], (err, rows)=>{
       if(err){
-        console.log('Error Salvando');
+        console.log('Error Salvando'+err);
         res.end();
       }
       return res.send(rows)

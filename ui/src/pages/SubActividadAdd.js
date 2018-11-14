@@ -21,6 +21,7 @@ import SpinGral from "../components/SpinGral";
 import ActividadAddForm from "../components/forms/ActividadAddForm";
 import SidebarActividad from "../containers/SidebarActividad";
 import SidebarSubActividad from "../containers/SidebarSubActividad";
+import SubActividadAddForm from "../components/forms/SubActividadAddForm";
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 const {TextArea} = Input;
@@ -81,7 +82,7 @@ export default class SubActividadAdd extends React.Component {
           <Divider/>
           <Row gutter={16}>
             <Col span={24}>
-              <ActividadAddForm curso={this.id}/>
+              <SubActividadAddForm curso={this.id} actividad={this.act}/>
             </Col>
 
           </Row>

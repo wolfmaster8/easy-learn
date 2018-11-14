@@ -22,7 +22,7 @@ module.exports = {
   async create(req, res){
     const data = req.body;
     const query = "INSERT INTO actividad SET ?";
-    db.query(query, [data], (err, rows, fields)=>{
+    db.query(query, [data], (err, rows)=>{
       if(err){
         console.log('Error Salvando');
         res.end();

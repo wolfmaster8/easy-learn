@@ -30,7 +30,7 @@ router.get('/nota/usuario/:user/actividad/:id', ActividadEstudiante.verNota);
 router.post('/nota/usuario/:user/actividad/:act', ActividadEstudiante.asignarNota);
 router.post('/nota/usuario/:user/actividad/:id/update', ActividadEstudiante.editarNota);
 
-/* USUARIOS -> SUBACTIVIDAD*/
+/* SUBACTIVIDAD*/
 const SubactividadController = require('./controllers/cursos/SubactividadController');
 router.get('/curso/:curso/actividad/:act/subactividades/', SubactividadController.index);
 router.get('/curso/:curso/actividad/:act/sub/:subact', SubactividadController.show);

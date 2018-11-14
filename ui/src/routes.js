@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import * as pages from './pages';
+import SubActividadAdd from "./pages/SubActividadAdd";
 
 const Routes = () => (
   <Fragment>
@@ -12,7 +13,9 @@ const Routes = () => (
       <Route path="/cursos/new" component={pages.CursoAdd}/>
       <Route exact path="/cursos/:id/actividades/new" component={pages.ActividadAdd}/>
       {/* <Route exact path="/cursos/:id/actividades" component={pages.ActividadAdd}/> */}
-      <Route exact path="/curso/:curso/actividad/:act/subactividad/new" component={pages.SubActividadAdd}/>
+      <Route path="/curso/:curso/actividad/:act/subactividad/new" component={(props)=>(
+        <pages.SubActividadAdd timestamp={new Date().toString()} {...props}/>
+      )}/>
       <Route path="/cursos/usuario/:id" component={pages.CursoUsuario}/>
       <Redirect to="/"/>
     </Switch>

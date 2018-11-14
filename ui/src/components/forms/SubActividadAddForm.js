@@ -10,28 +10,25 @@ import {
 const Option = Select.Option;
 const {TextArea} = Input;
 
- class ActividadAddForm extends React.Component{
+ class SubActividadAddForm extends React.Component{
    constructor(props) {
      super(props);
 
-     
-   }
-
-   async componentDidMount(){
-      this.id_curso = this.props.curso;
-     /*const response = await api.get('/usuario/rol/3');
-     this.setState({profesores: response.data, loadingProf: false})*/
    }
 
 
    handleSubmit = async e => {
     e.preventDefault();
-    await this.props.form.validateFields((err, values) => {
+     const {curso, actividad} = this.props;
+     console.log(curso);
+     await this.props.form.validateFields((err, values) => {
       if (!err) {
-        values["id_curso"] = parseInt(this.id_curso);
-        api.post(`/curso/${this.id_curso}/actividad`, values);
+        values["id_curso"] = parseInt(curso);
+        values["id_actividad"] = parseInt(actividad);
+        console.log(values);
+        api.post(`/curso/${curso}/actividad/${actividad}/sub/`, values);
         this.successGuardando();
-        this.props.history.push('/cursos');
+        this.props.history.push(`/cursos/${curso}/actividades/new`);
 
       }else{
         this.errorGuardando();
@@ -55,12 +52,12 @@ const {TextArea} = Input;
       >
         <Row gutter={16}>
           <Col span={6}>
-            <Form.Item label="Titulo de la Actividad">
+            <Form.Item label="Titulo de la Subactividad">
               {getFieldDecorator('titulo', {
                 initialValue: '',
-                rules: [{ required: true, message: 'Ingresa el título la Actividad' }],
+                rules: [{ required: true, message: 'Ingresa el título la Subactividad' }],
               })(
-                <Input autoFocus={true} placeholder="Actividad"/>
+                <Input autoFocus={true} placeholder="Subactividad"/>
               )}
             </Form.Item>
 
@@ -80,13 +77,13 @@ const {TextArea} = Input;
             <Form.Item label="Descripción">
               {getFieldDecorator('descripcion', {
                 initialValue: '',
-                rules: [{ required: true, message: 'Debes ingresar una descripción al curso' }],
+                rules: [{ required: true, message: 'Debes ingresar una descripción a la subactividad' }],
               })(
                 <TextArea rows={6} placeholder="Descripción"/>
               )}
             </Form.Item>
 
-            <Button style={{ marginTop: 20 }} type="primary" htmlType="submit">Crear Actividad</Button>
+            <Button style={{ marginTop: 20 }} type="primary" htmlType="submit">Crear Subactividad</Button>
           </Col>
         </Row>
       </Form>
@@ -94,4 +91,4 @@ const {TextArea} = Input;
   }
 }
 
-export default ActividadAddForm = withRouter(Form.create({})(ActividadAddForm));
+export default SubActividadAddForm = withRouter(Form.create({})(SubActividadAddForm));
