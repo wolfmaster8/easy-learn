@@ -13,7 +13,7 @@ const Option = Select.Option;
       if (!err) {
         const pwdInput = "astr34rtgr";
         values["pwd"] = hash.generate(pwdInput);
-        console.log(values);
+        // console.log(values);
         api.post('/usuario', values);
         this.successGuardando();
       }else{

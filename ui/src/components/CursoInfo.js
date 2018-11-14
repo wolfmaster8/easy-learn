@@ -35,7 +35,7 @@ import {
 
   countActivities = (actividades) => {
     let numeroActividades = actividades.length;
-    console.log(numeroActividades);
+    // console.log(numeroActividades);
     if(numeroActividades === 0){
       return "Sin Actividades";
     }else{
@@ -43,7 +43,7 @@ import {
     }
   }
   renderNota(){
-    console.log('Ver nota');
+    // console.log('Ver nota');
     this.setState({nota: !this.state.nota});
   }
 
@@ -53,11 +53,11 @@ import {
     message.success('Curso Eliminado');
     this.props.history.push('/cursos');
 
+  };
 
-  }
   cancel = () =>{
     message.info('Uhh... casi...')
-  }
+  };
   render(){
     const {nota, cursoInfo, actividades, loadingAct} = this.state;
     return(
@@ -70,7 +70,7 @@ import {
           }
           actions={[<Icon type="edit" />,
            <Icon type="eye" />, 
-           <Popconfirm title="¿Seguro que deseas eliminar este curso?" onConfirm={this.deleteCurso} onCancel={this.cancel} okText="Sí" cancelText="No">
+           <Popconfirm placement="topRight" title="¿Seguro que deseas eliminar este curso?" onConfirm={this.deleteCurso} onCancel={this.cancel} okText="Sí" cancelText="No">
           <Icon type="close-circle" />
         </Popconfirm>
            ]}

@@ -13,8 +13,8 @@ module.exports = {
   },
   async show(req, res){
     const curso = req.params.id;
-    const id = req.params.subact;
-    const query = "SELECT * FROM subactividad WHERE id_subactividad=?";
+    const id = req.params.act;
+    const query = "SELECT * FROM subactividad WHERE id_actividad=?";
     db.query(query, [id], (err, rows, fields)=>{
       return res.json(rows);
     })
