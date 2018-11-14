@@ -1,9 +1,12 @@
 import React, {Component, Fragment} from 'react';
-import { Badge, Button, Card, Col, Divider, Progress, Tooltip, Skeleton } from "antd";
+import { Badge, Button, Card, Col, Divider, Progress, Tooltip, Skeleton, Icon, message, Popconfirm } from "antd";
+import {Link} from 'react-router-dom'
 import api from "../services/api";
+import {
+  withRouter
+} from 'react-router-dom';
 
-
-export default class CursoInfo extends Component{
+ class CursoInfo extends Component{
   constructor( props ) {
     super(props);
     this.renderNota = this.renderNota.bind(this);
@@ -27,15 +30,34 @@ export default class CursoInfo extends Component{
         this.setState({cursoInfo: curso.data[0]});
         const actividades = await api.get(`/curso/${id_curso}/actividades`);
         this.setState({actividades: actividades.data, loadingAct: false});
-      }
-    
+      }  
   }
-  
+
+  countActivities = (actividades) => {
+    let numeroActividades = actividades.length;
+    console.log(numeroActividades);
+    if(numeroActividades === 0){
+      return "Sin Actividades";
+    }else{
+      return numeroActividades;
+    }
+  }
   renderNota(){
     console.log('Ver nota');
     this.setState({nota: !this.state.nota});
   }
-  
+
+  deleteCurso = async () =>{
+    const id_curso = this.props.cursos.id_curso;
+    await api.delete(`/curso/${id_curso}`);
+    message.success('Curso Eliminado');
+    this.props.history.push('/cursos');
+
+
+  }
+  cancel = () =>{
+    message.info('Uhh... casi...')
+  }
   render(){
     const {nota, cursoInfo, actividades, loadingAct} = this.state;
     return(
@@ -44,9 +66,16 @@ export default class CursoInfo extends Component{
           <Card
             loading={loadingAct}
             title={cursoInfo.titulo ? cursoInfo.titulo : <Skeleton/>}
-            extra={<Button disabled type="primary" href="#">Entrar</Button>}
+            extra={<Button type="primary"><Link to={`/cursos/${cursoInfo.id_curso}/actividades/new`}>Añadir</Link></Button>
+          }
+          actions={[<Icon type="edit" />,
+           <Icon type="eye" />, 
+           <Popconfirm title="¿Seguro que deseas eliminar este curso?" onConfirm={this.deleteCurso} onCancel={this.cancel} okText="Sí" cancelText="No">
+          <Icon type="close-circle" />
+        </Popconfirm>
+           ]}
           >
-            <p>Actividades <Badge className="pull-right" count={actividades.length} /></p>
+            <p>Actividades <Badge className="pull-right" count={this.countActivities(actividades)} /></p>
             {/*<Divider />
             <h4 className="text-center">Próxima Entrega</h4>
             <p className="text-center"><Badge status="processing" />18 de Noviembre</p>*/}
@@ -70,3 +99,5 @@ export default class CursoInfo extends Component{
     )
   }
 }
+
+export default withRouter(CursoInfo);

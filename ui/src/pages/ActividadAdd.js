@@ -37,7 +37,6 @@ export default class ActividadAdd extends React.Component {
   const idCurso = this.id;
   const response = await api.get(`/curso/${idCurso}`);
   this.setState({infoCurso: response.data[0]});
-  console.log(this.state.infoCurso)
 }
 
 handleChange(){
@@ -70,7 +69,7 @@ handleChange(){
               </Steps>
             </Col>*/}
             <Col span={24}>
-              <ActividadAddForm/>
+              <ActividadAddForm curso={this.id}/>
             </Col>
 
           </Row>

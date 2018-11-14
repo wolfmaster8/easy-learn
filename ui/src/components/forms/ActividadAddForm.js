@@ -4,32 +4,34 @@ import api from '../../services/api';
 import hash from 'password-hash';
 import Col from "antd/es/grid/col";
 import Row from "antd/es/grid/row";
-
+import {
+  withRouter
+} from 'react-router-dom';
 const Option = Select.Option;
 const {TextArea} = Input;
 
  class ActividadAddForm extends React.Component{
    constructor(props) {
      super(props);
-     this.state = {
-       profesores: [],
-       loadingProf: true
-     }
+
+     
    }
 
    async componentDidMount(){
-     const response = await api.get('/usuario/rol/3');
-     this.setState({profesores: response.data, loadingProf: false})
+      this.id_curso = this.props.curso;
+     /*const response = await api.get('/usuario/rol/3');
+     this.setState({profesores: response.data, loadingProf: false})*/
    }
+
 
    handleSubmit = async e => {
     e.preventDefault();
     await this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log(values);
-        // api.post('/curso', values);
+        values["id_curso"] = parseInt(this.id_curso);
+        api.post(`/curso/6/actividad`, values);
         this.successGuardando();
-        // this.props.history.push('/cursos');
+        this.props.history.push('/cursos');
 
       }else{
         this.errorGuardando();
@@ -37,7 +39,7 @@ const {TextArea} = Input;
     });
   };
   successGuardando = () => {
-    message.success('Usuario Guardado con éxito');
+    message.success('Actividad Guardada con éxito');
   };
    errorGuardando = () =>{
      message.error('Error Guardando');
@@ -45,7 +47,6 @@ const {TextArea} = Input;
 
   render(){
     const { getFieldDecorator } = this.props.form;
-    const {profesores, loadingProf} = this.state;
     return (
       <Form
         className="login-form"
@@ -71,7 +72,6 @@ const {TextArea} = Input;
                 <InputNumber
                   min={0}
                   max={10}
-
                 />
               )}
             </Form.Item>
@@ -86,7 +86,7 @@ const {TextArea} = Input;
               )}
             </Form.Item>
 
-            <Button style={{ marginTop: 20 }} type="primary" htmlType="submit">Crear Curso</Button>
+            <Button style={{ marginTop: 20 }} type="primary" htmlType="submit">Crear Actividad</Button>
           </Col>
         </Row>
       </Form>
@@ -94,4 +94,4 @@ const {TextArea} = Input;
   }
 }
 
-export default ActividadAddForm = Form.create({})(ActividadAddForm);
+export default ActividadAddForm = withRouter(Form.create({})(ActividadAddForm));

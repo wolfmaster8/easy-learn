@@ -32,7 +32,7 @@ export default class UsuarioInfo extends Component{
       <List.Item actions={[
         <Link disabled to={`/usuario/${user.id_usuario}/asignar/cursos/`}>Asignar Cursos</Link>,
         <Link disabled to={`/usuario/editar/${user.id_usuario}`}>Editar</Link>,
-        <Popconfirm title="Seguro que deseas eliminar este usuario?" onConfirm={this.deleteUser} onCancel={this.cancel} okText="Sí" cancelText="No">
+        <Popconfirm title="¿Seguro que deseas eliminar este usuario?" onConfirm={this.deleteUser} onCancel={this.cancel} okText="Sí" cancelText="No">
           <Button type="danger">Eliminar</Button>
         </Popconfirm>
       ]}>

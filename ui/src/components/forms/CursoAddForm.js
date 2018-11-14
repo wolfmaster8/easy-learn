@@ -4,7 +4,9 @@ import api from '../../services/api';
 import hash from 'password-hash';
 import Col from "antd/es/grid/col";
 import Row from "antd/es/grid/row";
-
+import {
+  withRouter
+} from 'react-router-dom';
 const Option = Select.Option;
 const {TextArea} = Input;
 
@@ -26,7 +28,6 @@ const {TextArea} = Input;
     e.preventDefault();
     await this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log(values);
         api.post('/curso', values);
         this.successGuardando();
         this.props.history.push('/cursos');
@@ -37,7 +38,7 @@ const {TextArea} = Input;
     });
   };
   successGuardando = () => {
-    message.success('Usuario Guardado con éxito');
+    message.success('Curso Guardado con éxito');
   };
    errorGuardando = () =>{
      message.error('Error Guardando');
@@ -92,4 +93,4 @@ const {TextArea} = Input;
   }
 }
 
-export default CursoAddForm = Form.create({})(CursoAddForm);
+export default CursoAddForm = withRouter(Form.create({})(CursoAddForm));
