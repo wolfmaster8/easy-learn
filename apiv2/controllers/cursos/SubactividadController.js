@@ -2,8 +2,9 @@ const db = require('../../dbconnection');
 
 module.exports = {
   async index(req,res){
-    const query = "SELECT * FROM subactividad";
-    db.query(query, (err, rows, fields)=>{
+    const act = req.params.act;
+    const query = "SELECT * FROM subactividad WHERE id_actividad=?";
+    db.query(query,[act], (err, rows)=>{
       if(err){
         console.log(err);
         res.end();
@@ -12,17 +13,16 @@ module.exports = {
     })
   },
   async show(req, res){
-    const curso = req.params.id;
-    const id = req.params.act;
-    const query = "SELECT * FROM subactividad WHERE id_actividad=?";
-    db.query(query, [id], (err, rows, fields)=>{
+    const id = req.params.subact;
+    const query = "SELECT * FROM subactividad WHERE id_subactividad=?";
+    db.query(query, [id], (err, rows)=>{
       return res.json(rows);
     })
   },
   async create(req, res){
     const data = req.body;
     const query = "INSERT INTO subactividad SET ?";
-    db.query(query, [data], (err, rows, fields)=>{
+    db.query(query, [data], (err, rows)=>{
       if(err){
         console.log('Error Salvando');
         res.end();
@@ -34,7 +34,7 @@ module.exports = {
     const id = req.params.subact;
     const dataUpdate = req.body;
     const query = "UPDATE subactividad SET ? WHERE id_subactividad=?";
-    db.query(query,[dataUpdate, id], (err, rows, fields)=>{
+    db.query(query,[dataUpdate, id], (err, rows)=>{
       if(err){
         res.send(err)
       }
