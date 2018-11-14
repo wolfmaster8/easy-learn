@@ -33,7 +33,7 @@ handleChange(){
 
     return (
       <Layout>
-        <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
+        <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 680 }}>
           <Row gutter={16}>
             <Col span={8}>
               <Breadcrumb style={{ margin: '16px 0' }}>

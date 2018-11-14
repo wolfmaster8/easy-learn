@@ -22,6 +22,7 @@ import ActividadAddForm from "../components/forms/ActividadAddForm";
 import SidebarActividad from "../containers/SidebarActividad";
 import SidebarSubActividad from "../containers/SidebarSubActividad";
 import SubActividadAddForm from "../components/forms/SubActividadAddForm";
+import Badge from "antd/es/badge";
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 const {TextArea} = Input;
@@ -37,6 +38,8 @@ export default class SubActividadAdd extends React.Component {
       infoCurso: {},
       actividades: [],
       subactividades: [],
+      infoActividad: [],
+      puntosMaximosSub: 10,
       loading: true
     }
   }
@@ -47,27 +50,42 @@ export default class SubActividadAdd extends React.Component {
   const response = await api.get(`/curso/${idCurso}`);
   const actividades = await api.get(`/curso/${idCurso}/actividades`);
   const subactividades = await api.get(`/curso/${idCurso}/actividad/${idAct}/subactividades/`);
+  const puntosActividad = await api.get(`/curso/${idCurso}/actividad/${idAct}`);
 
-  this.setState({infoCurso: response.data[0],
+
+    this.setState({infoCurso: response.data[0],
     actividades: actividades.data,
     subactividades: subactividades.data,
+      infoActividad: puntosActividad.data[0],
     loading: false});
 
-  console.log(this.state.subactividades);
+    this.getPuntaje()
+
+  // console.log(this.state.subactividades);
 
 }
 
+  getPuntaje= () =>{
+    const { subactividades } = this.state;
+    let puntajeTotal = 0;
+    subactividades.map(sub => (
+      puntajeTotal = puntajeTotal + sub.puntaje
+    ));
+    this.setState({puntosMaximosSub: puntajeTotal})
+  };
+
 
   render() {
-  const {infoCurso, actividades, subactividades} = this.state;
+  const {infoCurso, actividades, subactividades, infoActividad, puntosMaximosSub, loading} = this.state;
+  if(loading) return <SpinGral/>
     return (
       <Layout>
         <SidebarActividad curso={infoCurso} actividades={actividades}/>
         <SidebarSubActividad curso={infoCurso} subactividades={subactividades}/>
 
-        <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
+        <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 680 }}>
           <Row gutter={16}>
-            <Col span={24}>
+            <Col span={18}>
               <Breadcrumb style={{ margin: '16px 0' }}>
                 <Breadcrumb.Item>Inicio</Breadcrumb.Item>
                 <Breadcrumb.Item>Administrador</Breadcrumb.Item>
@@ -77,12 +95,16 @@ export default class SubActividadAdd extends React.Component {
                 <Breadcrumb.Item><Link to="/cursos">Nueva Subactividad</Link></Breadcrumb.Item>
               </Breadcrumb>
             </Col>
+            <Col span={6}>
+              <Badge  count={`Puntos: ${puntosMaximosSub}/${infoActividad.puntos}`} style={{backgroundColor: "#3BAC53", float: 'right'}}/>
+            </Col>
+
 
           </Row>
           <Divider/>
           <Row gutter={16}>
             <Col span={24}>
-              <SubActividadAddForm curso={this.id} actividad={this.act}/>
+              <SubActividadAddForm curso={this.id} actividad={actividades[0]} puntosMaximos={infoActividad.puntos-puntosMaximosSub}/>
             </Col>
 
           </Row>

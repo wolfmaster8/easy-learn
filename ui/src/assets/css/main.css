@@ -1,42 +1,47 @@
 * {
-  font-family: "PT Sans Caption", sans-serif;
-}
+  font-family: 'PT Sans Caption', sans-serif; }
 
 .text-white {
-  color: white !important;
-}
+  color: white !important; }
 
 .text-center {
-  text-align: center;
-}
+  text-align: center; }
 
 .pull-right {
-  float: right;
-}
+  float: right; }
 
 .background-ean {
-  background: #3BAC53;
-}
-.background-ean ul {
-  background: #3BAC53;
-}
-.background-ean ul .ant-menu-item-selected {
-  background-color: #378844 !important;
-}
+  background: #3BAC53; }
+  .background-ean ul {
+    background: #3BAC53; }
+    .background-ean ul .ant-menu-item-selected {
+      background-color: #378844 !important; }
 
 .spin {
   text-align: center;
   margin-bottom: 0px;
-  padding: 30px 50px;
-}
+  padding: 30px 50px; }
 
 .ant-btn-primary {
   background: #3BAC53;
-  border-color: #3BAC53;
-}
-.ant-btn-primary:hover, .ant-btn-primary:focus {
-  background: #378844;
-  border-color: #378844;
-}
+  border-color: #3BAC53; }
+  .ant-btn-primary:hover, .ant-btn-primary:focus {
+    background: #378844;
+    border-color: #378844; }
+
+.ant-layout-footer {
+  background: black !important;
+  color: white; }
+
+.ant-menu-item > a:hover {
+  color: #3BAC53; }
+
+.ant-layout-sider-dark .ant-menu-dark {
+  background: black !important; }
+.ant-layout-sider-dark .ant-menu-item-selected {
+  background: rgba(59, 172, 83, 0.69) !important;
+  color: white; }
+  .ant-layout-sider-dark .ant-menu-item-selected:after {
+    border-right: 3px solid #3BAC53 !important; }
 
 /*# sourceMappingURL=main.css.map */

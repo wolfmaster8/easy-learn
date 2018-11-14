@@ -28,7 +28,7 @@ export default class AsignarCursos extends React.Component{
     if(loading) return <SpinGral/>;
     return(
       <Layout>
-        <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
+        <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 680 }}>
           <Row gutter={16}>
             {cursos.map(curso =>(
               <CursoInfo key={curso.id} info={curso}/>

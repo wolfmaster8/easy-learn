@@ -7,14 +7,13 @@ import Row from "antd/es/grid/row";
 import {
   withRouter
 } from 'react-router-dom';
+import Badge from "antd/es/badge";
 const Option = Select.Option;
 const {TextArea} = Input;
 
  class SubActividadAddForm extends React.Component{
-   constructor(props) {
-     super(props);
 
-   }
+
 
 
    handleSubmit = async e => {
@@ -23,10 +22,9 @@ const {TextArea} = Input;
      console.log(curso);
      await this.props.form.validateFields((err, values) => {
       if (!err) {
-        values["id_curso"] = parseInt(curso);
-        values["id_actividad"] = parseInt(actividad);
-        console.log(values);
-        api.post(`/curso/${curso}/actividad/${actividad}/sub/`, values);
+        values["id_actividad"] = parseInt(actividad.id_actividad);
+        // console.log(values);
+        api.post(`/curso/${curso}/actividad/${actividad.id_actividad}/sub/`, values);
         this.successGuardando();
         this.props.history.push(`/cursos/${curso}/actividades/new`);
 
@@ -42,8 +40,10 @@ const {TextArea} = Input;
      message.error('Error Guardando');
    };
 
+
   render(){
     const { getFieldDecorator } = this.props.form;
+    const { puntosMaximos } = this.props;
     return (
       <Form
         className="login-form"
@@ -61,23 +61,23 @@ const {TextArea} = Input;
               )}
             </Form.Item>
 
-            <Form.Item label="Puntos">
-              {getFieldDecorator('puntos', {
+            <Form.Item label={`Puntos (${puntosMaximos})`}>
+              {getFieldDecorator('puntaje', {
                 initialValue: '',
                 rules: [{ required: true, message: 'Asigna un puntaje total' }],
               })(
                 <InputNumber
-                  min={0}
-                  max={10}
+                  min={1}
+                  max={puntosMaximos}
                 />
               )}
             </Form.Item>
           </Col>
           <Col span={18}>
-            <Form.Item label="Descripción">
-              {getFieldDecorator('descripcion', {
+            <Form.Item label="Instrucciones">
+              {getFieldDecorator('instrucciones', {
                 initialValue: '',
-                rules: [{ required: true, message: 'Debes ingresar una descripción a la subactividad' }],
+                rules: [{ required: true, message: 'Debes ingresar una instrucción para la subactividad' }],
               })(
                 <TextArea rows={6} placeholder="Descripción"/>
               )}

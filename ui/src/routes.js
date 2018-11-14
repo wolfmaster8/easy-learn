@@ -9,9 +9,13 @@ const Routes = () => (
       <Route exact path="/" component={pages.Demo}/>
       <Route exact path="/usuarios" component={pages.Usuarios}/>
       <Route path="/usuario/:id/asignar/cursos" component={pages.AsignarCursos}/>
-      <Route exact path="/cursos" component={pages.Cursos}/>
+      <Route exact path="/cursos" component={(props)=>(
+        <pages.Cursos timestamp={new Date().toString()} {...props}/>
+      )}/>
       <Route path="/cursos/new" component={pages.CursoAdd}/>
-      <Route exact path="/cursos/:id/actividades/new" component={pages.ActividadAdd}/>
+      <Route exact path="/cursos/:id/actividades/new" component={(props)=>(
+        <pages.ActividadAdd timestamp={new Date().toString()} {...props}/>
+      )}/>
       {/* <Route exact path="/cursos/:id/actividades" component={pages.ActividadAdd}/> */}
       <Route path="/curso/:curso/actividad/:act/subactividad/new" component={(props)=>(
         <pages.SubActividadAdd timestamp={new Date().toString()} {...props}/>

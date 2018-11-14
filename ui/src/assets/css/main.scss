@@ -1,5 +1,6 @@
 $verde: #3BAC53;
 $verdeO: #378844;
+$verdeT: rgba(59, 172, 83, 0.69);
 *{
   font-family: 'PT Sans Caption', sans-serif;
 }
@@ -38,4 +39,23 @@ $verdeO: #378844;
 }
 .ant-layout-footer{
   background: black !important;
+  color: white;
+}
+.ant-menu-item > a{
+  &:hover{
+    color: $verde;
+  }
+}
+.ant-layout-sider-dark{
+
+  .ant-menu-dark{
+    background: black !important;
+  }
+  .ant-menu-item-selected{
+    background: $verdeT !important;
+    color: white;
+    &:after{
+      border-right: 3px solid $verde !important;
+    }
+  }
 }

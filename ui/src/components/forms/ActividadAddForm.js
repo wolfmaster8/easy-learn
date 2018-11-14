@@ -31,7 +31,7 @@ const {TextArea} = Input;
         values["id_curso"] = parseInt(this.id_curso);
         api.post(`/curso/${this.id_curso}/actividad`, values);
         this.successGuardando();
-        this.props.history.push('/cursos');
+        this.props.history.push(`/cursos/${this.id_curso}/actividades/new`);
 
       }else{
         this.errorGuardando();

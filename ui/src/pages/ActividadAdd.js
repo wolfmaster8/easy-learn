@@ -15,7 +15,8 @@ import {
   Breadcrumb,
   Steps,
   Input, Icon,
-  Menu
+  Menu,
+  notification
 } from "antd";
 import SpinGral from "../components/SpinGral";
 import ActividadAddForm from "../components/forms/ActividadAddForm";
@@ -47,7 +48,7 @@ export default class ActividadAdd extends React.Component {
     this.setState({ infoCurso: response.data[0], actividades: actividades.data, loading: false });
 
     // console.log(this.state.actividades);
-
+  this.openNotification()
   }
 
   getSubactividades = async (id_actividad) => {
@@ -55,16 +56,24 @@ export default class ActividadAdd extends React.Component {
     let subactividades = await api.get(`/curso/${this.id}/actividad/${id_actividad}/subactividades/`);
     this.setState({ subactividades: subactividades.data })
 
-
   }
 
+  openNotification = () => {
+    const args = {
+      message: 'Notification Title',
+      description: 'I will never close automatically. I will be close automatically. I will never close automatically.',
+      duration: 0,
+    };
+    notification.open(args);
+  };
 
   render() {
-    const { infoCurso, actividades } = this.state;
+    const { infoCurso, actividades, loading } = this.state;
+    if(loading) return <SpinGral/>;
     return (
       <Layout>
         <SidebarActividad curso={infoCurso} actividades={actividades}/>
-        <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
+        <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 680 }}>
           <Row gutter={16}>
             <Col span={8}>
               <Breadcrumb style={{ margin: '16px 0' }}>
