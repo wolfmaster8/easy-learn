@@ -1,8 +1,6 @@
 import React from 'react';
-import Row from "antd/es/grid/row";
-import Col from "antd/es/grid/col";
 import Logo from './../assets/images/logo-horizontal.png';
-import { Layout, Menu, Avatar } from 'antd';
+import { Layout, Menu, Avatar, Row, Col, Badge } from 'antd';
 import Link from "react-router-dom/es/Link";
 const { Header} = Layout;
 
@@ -46,7 +44,14 @@ export default class HeaderGral extends React.Component{
               </Menu>
             </Col>
             <Col span={6}>
-              <Avatar icon="user" /> <span className="text-white">{nombre ? nombre : 'Usuario'}</span>
+              <div className="text-right">
+                <a style={{marginRight: 15}} href="#">
+                  <Badge count={5} style={{background: '#ff8a65', top: '-5px', height: '15px', minWidth: '15px', padding: '0 3px', fontSize: 11, borderRadius: 15, lineHeight: '17px'}}>
+                    <Avatar icon="user" />
+                  </Badge>
+                </a>
+                 <span className="text-white">{nombre ? nombre : 'Usuario'}</span>
+              </div>
             </Col>
           </Row>
 

@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { Layout } from 'antd';
+import { Layout, Row, Col } from 'antd';
 const {  Footer } = Layout;
 
 
@@ -8,7 +8,14 @@ class FooterGral extends Component{
     return (
       <Layout>
         <Footer style={{textAlign:'center'}}>
-          All rights reserved 2018. Felipe Lobo & Alexis Chacón & Sergio Barón
+          <Row gutter={16}>
+            <Col span={12}>
+              <p className="text-left">All rights reserved 2018. Felipe Lobo & Alexis Chacón & Sergio Barón</p>
+            </Col>
+            <Col span={12}>
+              <p className="text-right">Versión 0.4a</p>
+            </Col>
+          </Row>
         </Footer>
       </Layout>
     );

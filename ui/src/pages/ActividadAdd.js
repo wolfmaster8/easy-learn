@@ -48,7 +48,7 @@ export default class ActividadAdd extends React.Component {
     this.setState({ infoCurso: response.data[0], actividades: actividades.data, loading: false });
 
     // console.log(this.state.actividades);
-  this.openNotification()
+  this.openNotification('info')
   }
 
   getSubactividades = async (id_actividad) => {
@@ -58,13 +58,11 @@ export default class ActividadAdd extends React.Component {
 
   }
 
-  openNotification = () => {
-    const args = {
-      message: 'Notification Title',
-      description: 'I will never close automatically. I will be close automatically. I will never close automatically.',
-      duration: 0,
-    };
-    notification.open(args);
+  openNotification = (type) => {
+    notification[type]({
+      message: 'Crea Subactividades',
+      description: 'Para crear subactividades haz clic en el título de la actividad',
+    });
   };
 
   render() {

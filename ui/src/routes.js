@@ -16,6 +16,8 @@ const Routes = () => (
       <Route exact path="/cursos/:id/actividades/new" component={(props)=>(
         <pages.ActividadAdd timestamp={new Date().toString()} {...props}/>
       )}/>
+      <Route path="/ver/curso/:id" component={pages.CursoVer}/>
+
       {/* <Route exact path="/cursos/:id/actividades" component={pages.ActividadAdd}/> */}
       <Route path="/curso/:curso/actividad/:act/subactividad/new" component={(props)=>(
         <pages.SubActividadAdd timestamp={new Date().toString()} {...props}/>

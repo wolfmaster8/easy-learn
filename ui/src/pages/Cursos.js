@@ -35,15 +35,17 @@ export default class Cursos extends React.Component{
       <Layout>
         <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 680 }}>
         <Row gutter={16}>
-            <Col span={6}>
+            <Col span={12}>
               <Breadcrumb style={{ margin: '16px 0' }}>
                 <Breadcrumb.Item>Inicio</Breadcrumb.Item>
                 <Breadcrumb.Item>Administrador</Breadcrumb.Item>
                 <Breadcrumb.Item>Cursos</Breadcrumb.Item>
               </Breadcrumb>
             </Col>
-            <Col span={8} >
-             <Link to="/cursos/new"><Button type="primary">Añadir Curso</Button></Link>
+            <Col span={12} >
+              <div className="text-right">
+              <Link to="/cursos/new"><Button type="primary">Añadir Curso</Button></Link>
+              </div>
             </Col>
           </Row>
           <Divider/>

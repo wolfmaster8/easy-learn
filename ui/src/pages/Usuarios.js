@@ -99,16 +99,18 @@ export default class Usuarios extends React.Component {
     return (
       <Layout>
         <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 680 }}>
-          <Row gutter={16}>
-            <Col span={4}>
+          <Row justify="between" gutter={16}>
+            <Col span={12}>
               <Breadcrumb style={{ margin: '16px 0' }}>
                 <Breadcrumb.Item>Inicio</Breadcrumb.Item>
                 <Breadcrumb.Item>Administrador</Breadcrumb.Item>
                 <Breadcrumb.Item>Usuarios</Breadcrumb.Item>
               </Breadcrumb>
             </Col>
-            <Col span={8}>
-              <Button type="primary" onClick={this.showDrawer}>Añadir Usuario</Button>
+            <Col span={12}>
+              <div className="text-right">
+                <Button type="primary " onClick={this.showDrawer}>Añadir Usuario</Button>
+              </div>
             </Col>
           </Row>
           <Divider/>

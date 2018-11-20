@@ -66,16 +66,16 @@ import {
           <Card
             loading={loadingAct}
             title={cursoInfo.titulo ? cursoInfo.titulo : <Skeleton/>}
-            extra={<Button type="primary"><Link to={`/cursos/${cursoInfo.id_curso}/actividades/new`}>Añadir</Link></Button>
+            extra={<Button type="primary"><Link to={`/cursos/${cursoInfo.id_curso}/actividades/new`}>Editar</Link></Button>
           }
-          actions={[<Icon type="edit" />,
-           <Icon type="eye" />, 
+          actions={[/*<Icon type="edit"/>*/'',
+            <Link to={`/ver/curso/${cursoInfo.id_curso}`}><Icon type="eye" /></Link>,
            <Popconfirm placement="topRight" title="¿Seguro que deseas eliminar este curso?" onConfirm={this.deleteCurso} onCancel={this.cancel} okText="Sí" cancelText="No">
           <Icon type="close-circle" />
         </Popconfirm>
            ]}
           >
-            <p>Actividades <Badge className="pull-right" count={this.countActivities(actividades)} /></p>
+            <p>Actividades <Badge className="pull-right" style={{ backgroundColor: '#ff8a65' }} count={this.countActivities(actividades)} /></p>
             {/*<Divider />
             <h4 className="text-center">Próxima Entrega</h4>
             <p className="text-center"><Badge status="processing" />18 de Noviembre</p>*/}
