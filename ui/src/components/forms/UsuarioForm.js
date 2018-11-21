@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Form, Icon, Input, Select, message } from "antd";
 import api from '../../services/api';
-import hash from 'password-hash';
+const bcrypt = require('bcryptjs');
 
 const Option = Select.Option;
 
@@ -12,9 +12,18 @@ const Option = Select.Option;
     await this.props.form.validateFields((err, values) => {
       if (!err) {
         const pwdInput = "astr34rtgr";
-        values["pwd"] = hash.generate(pwdInput);
+        const saltRounds =10;
+        values["pwd"] = bcrypt.genSalt(saltRounds, function(err, salt){
+          bcrypt.hash(pwdInput, salt, function(err, hash){
+            if(err){
+              console.log(err)
+            }else{
+              console.log(hash)
+            }
+          })
+        });
         // console.log(values);
-        api.post('/usuario', values);
+        // api.post('/usuario', values);
         this.successGuardando();
       }else{
         this.errorGuardando();

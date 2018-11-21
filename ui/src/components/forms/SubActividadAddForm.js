@@ -1,13 +1,11 @@
 import React from 'react';
 import { Button, Form, Icon, Input, Select, message, InputNumber } from "antd";
 import api from '../../services/api';
-import hash from 'password-hash';
 import Col from "antd/es/grid/col";
 import Row from "antd/es/grid/row";
 import {
   withRouter
 } from 'react-router-dom';
-import Badge from "antd/es/badge";
 const Option = Select.Option;
 const {TextArea} = Input;
 
