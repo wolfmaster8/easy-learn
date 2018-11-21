@@ -1,11 +1,12 @@
 const mysql = require('mysql');
+require('dotenv').config()
 
 const dbconfig = {
-  host: 'easylearn.cfvh1qszjgl1.us-east-2.rds.amazonaws.com',
-  user: 'easylearnwolf8',
-  password: 'qFqp7wAAkB02',
-  port: 3306,
-  database: 'easylearn'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PWD,
+  port: process.env.DB_PORT,
+  database: process.env.DB_DB
 }
 
 let conn = mysql.createPool(dbconfig);

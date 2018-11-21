@@ -5,6 +5,7 @@
   "dependencies": {
     "antd": "^3.10.4",
     "axios": "^0.18.0",
+    "dotenv": "^6.1.0",
     "password-hash": "^1.2.2",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
