@@ -7,34 +7,26 @@ const Option = Select.Option;
 
  class UsuarioForm extends React.Component{
 
+
    handleSubmit = async e => {
     e.preventDefault();
     await this.props.form.validateFields((err, values) => {
       if (!err) {
         const pwdInput = "astr34rtgr";
-        const saltRounds =10;
-        values["pwd"] = bcrypt.genSalt(saltRounds, function(err, salt){
-          bcrypt.hash(pwdInput, salt, function(err, hash){
-            if(err){
-              console.log(err)
-            }else{
-              console.log(hash)
-            }
-          })
-        });
-        // console.log(values);
-        // api.post('/usuario', values);
+        values["pwd"] = pwdInput;
+        console.log(values);
+        api.post('/usuario', values);
         this.successGuardando();
       }else{
-        this.errorGuardando();
+        this.errorGuardando('Ocurrió un error inesperado al guardar. Intenta de nuevo.');
       }
     });
   };
   successGuardando = () => {
     message.success('Usuario Guardado con éxito');
   };
-   errorGuardando = () =>{
-     message.error('Error Guardando');
+   errorGuardando = (frase) =>{
+     message.error(frase);
    };
 
   render(){
@@ -46,7 +38,7 @@ const Option = Select.Option;
         onSubmit={this.handleSubmit}
       >
         <Form.Item label="Nombre">
-          {getFieldDecorator('nombre',{initialValue: '',
+          {getFieldDecorator('nombre',{initialValue: 'as',
             rules: [{ required: true, message: 'Ingresa un nombre' }],
           })(
             <Input
@@ -67,7 +59,7 @@ const Option = Select.Option;
         </Form.Item>
 
         <Form.Item label="Apellido">
-          {getFieldDecorator('apellido',{initialValue: '',
+          {getFieldDecorator('apellido',{initialValue: 'as',
             rules: [
               { required: true, message: 'Ingresa un apellido' }],
           })(
@@ -77,7 +69,7 @@ const Option = Select.Option;
         </Form.Item>
 
         <Form.Item label="Email">
-          {getFieldDecorator('email',{initialValue: '',
+          {getFieldDecorator('email',{initialValue: 'as@s.com',
             rules: [{
               type: 'email', message: 'Parece que el email no es válido',
             },
