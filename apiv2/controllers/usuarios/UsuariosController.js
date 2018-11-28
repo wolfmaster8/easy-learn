@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 module.exports = {
   async index(req,res){
     const query = "SELECT * FROM usuarios";
-    db.query(query, (err, rows, fields)=>{
+    db.query(query, (err, rows)=>{
       if(err){
         console.log(err);
         res.end();

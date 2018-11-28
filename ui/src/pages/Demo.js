@@ -1,6 +1,9 @@
 import React from 'react';
 import { Button, Layout, Form, Input, Row, Col, Alert, List, Icon } from 'antd';
 
+import api from '../services/api';
+import LoginForm from "../components/forms/LoginForm";
+
 
 const Content = Layout.Content;
 
@@ -33,7 +36,9 @@ export default class Demo extends React.Component {
   handleChange = e => {
     this.setState({ phraseDemo: e.target.value });
   };
-  
+
+
+
   render() {
     const { phraseDemo } = this.state;
     const data = [
@@ -87,6 +92,7 @@ export default class Demo extends React.Component {
               <h1>Bienvenido al Demo de EasyLearn</h1>
               <p>Este es el prototipo de EasyLearn, una plataforma para profesores y estudiantes.</p>
               <p>A continuación ingresa tu nombre</p>
+              <LoginForm />
               <Form onSubmit={this.handleSubmit}>
                 <Input autoFocus={true} value={phraseDemo} onChange={this.handleChange} placeholder="Nombre" onKeyDown={this.handleEnter} />
                 <br/>

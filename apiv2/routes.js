@@ -1,13 +1,25 @@
 const express = require('express');
 const router = express.Router();
+const verifyJWT = require('./controllers/auth/VerifyJWT');
 
+function requiresLogin(req,res, next){
+  if(req.session && req.session.userId){
+    console.log('great');
+    return next();
+  }else{
+    return res.status(401).send('Not logged in')
+  }
+}
 /*AUTH*/
 const UserAuthController = require('./controllers/auth/UserAuthController');
+const UserLogoutController = require('./controllers/auth/UserLogoutController');
 router.post('/auth/user', UserAuthController.authenticate);
-
+router.get('/auth/logout', UserLogoutController.logout);
 
 const UsuariosController = require('./controllers/usuarios/UsuariosController');
-router.get('/usuarios', UsuariosController.index);
+router.get('/usuarios', requiresLogin, (req,res)=>{
+  UsuariosController.index(req, res)
+});
 router.get('/usuario/:user', UsuariosController.show);
 router.post('/usuario/', UsuariosController.create);
 router.post('/usuario/:user/update', UsuariosController.update);

@@ -16,6 +16,7 @@ export default class Usuarios extends React.Component {
   constructor( props ) {
     super(props);
     this.showDrawer = this.showDrawer.bind(this);
+
     this.state = {
       data: {},
       loading: true,

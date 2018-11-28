@@ -3,12 +3,18 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const helmet = require('helmet');
-const jwt    = require('jsonwebtoken');
 const routes = require('./routes.js');
-const db = require('./dbconnection');
 const cors = require('cors');
 require('dotenv').config();
+const session = require('express-session');
+
 // MIDDLEWARES
+app.use(session({
+  secret: process.env.L188,
+  resave: true,
+  saveUninitialized: false
+}));
+
 app.use(helmet());
 app.use(cors());
 app.use(morgan('short'));
