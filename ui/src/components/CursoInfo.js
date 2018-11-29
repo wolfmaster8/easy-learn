@@ -68,7 +68,7 @@ import {
             title={cursoInfo.titulo ? cursoInfo.titulo : <Skeleton/>}
             extra={<Button type="primary"><Link to={`/cursos/${cursoInfo.id_curso}/actividades/new`}>Editar</Link></Button>
           }
-          actions={[/*<Icon type="edit"/>*/'',
+          actions={[ <Link to={`/inscribir/curso/${cursoInfo.id_curso}`}><Icon type="user" /></Link>,
             <Link to={`/ver/curso/${cursoInfo.id_curso}`}><Icon type="eye" /></Link>,
            <Popconfirm placement="topRight" title="¿Seguro que deseas eliminar este curso?" onConfirm={this.deleteCurso} onCancel={this.cancel} okText="Sí" cancelText="No">
           <Icon type="close-circle" />
