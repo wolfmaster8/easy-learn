@@ -31,7 +31,7 @@ module.exports = {
     })
   },
   async update(req, res){
-    const id = req.params.subact;
+    const id = req.params.id;
     const dataUpdate = req.body;
     const query = "UPDATE subactividad SET ? WHERE id_subactividad=?";
     db.query(query,[dataUpdate, id], (err, rows)=>{
@@ -42,8 +42,8 @@ module.exports = {
     })
   },
   async delete(req, res){
-    const id = req.params.subact;
-    const query = "DELETE FROM subactividad WHERE id_subactividad=?"
+    const id = req.params.id;
+    const query = "DELETE FROM subactividad WHERE id_subactividad=?";
     db.query(query, [id], (err, rows)=>{
       return res.send(rows);
     })

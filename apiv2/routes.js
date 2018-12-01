@@ -40,8 +40,9 @@ const SubactividadController = require('./controllers/cursos/SubactividadControl
 router.get('/curso/:curso/actividad/:act/subactividades/', SubactividadController.index);
 router.get('/curso/:curso/actividad/:act/sub/:subact', SubactividadController.show);
 router.post('/curso/:curso/actividad/:act/sub/', SubactividadController.create);
-router.post('/curso/:curso/actividad/:act/sub/:subact/update', SubactividadController.update);
-router.delete('/curso/:curso/actividad/:act:/sub/:subact', SubactividadController.delete);
+router.post('/subactividad/:id/update', SubactividadController.update);
+router.delete('/subactividad/:id/delete', SubactividadController.delete);
+
 /* SUBACTIVIDAD -> ACTIVIDAD */
 const SubactividadEstudiantesController = require('./controllers/usuarios/SubactividadEstudiantesController');
 router.get('/nota/usuario/:user/actividad/:act/subactividades/', SubactividadEstudiantesController.verNotasTodas);
@@ -80,5 +81,12 @@ router
       .status(200)
       .send('OK');
   });
+
+/* Errors */
+const Error = require('./controllers/Error');
+// 404
+router.get('*', Error.notFound);
+router.post('*', Error.notFound);
+router.delete('*', Error.notFound);
 
 module.exports = router;
