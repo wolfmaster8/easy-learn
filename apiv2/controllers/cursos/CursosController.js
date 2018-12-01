@@ -29,10 +29,10 @@ module.exports = {
     })
   },
   async update(req, res){
-    const id = req.params.curso;
+    const id = req.params.id;
     const dataUpdate = req.body;
     const query = "UPDATE cursos SET ? WHERE id_curso=?";
-    db.query(query,[dataUpdate, id], (err, rows, fields)=>{
+    db.query(query,[dataUpdate, id], (err, rows)=>{
       if(err){
         res.send(err)
       }
@@ -41,7 +41,7 @@ module.exports = {
   },
   async delete(req, res){
     const id = req.params.id;
-    const query = "DELETE FROM cursos WHERE id_curso=?"
+    const query = "DELETE FROM cursos WHERE id_curso=?";
     db.query(query, [id], (err, rows)=>{
       return res.send(rows);
     })
