@@ -71,16 +71,17 @@ router.delete('/mensajes/eliminar/:id', Mensajes.delete);
 
 
 
+const UsuarioCurso = require('./controllers/asociaciones/UsuarioCursoController');
 /* ASOCIACIONES*/
+router.get('/usuario/:user/cursos/:curso', UsuarioCurso.verPorUsarioCurso);
 /* USUARIO -> CURSO */
-const UsuarioCurso = require('./controllers/asociaciones/UsuarioCurso');
 router.get('/usuarios/cursos/', UsuarioCurso.index);
 router.get('/usuario/:user/cursos/', UsuarioCurso.verPorUsuario);
 router.post('/usuario/:user/curso/', UsuarioCurso.create);
 router.post('/usuario/:user/curso/:asoc/update', UsuarioCurso.update);
-router.delete('/usuario/:user/curso/:asoc', UsuarioCurso.delete);
+router.delete('/usuario/:user/curso/:curso', UsuarioCurso.delete);
 /* CURSO -> USUARIO */
-router.get('/curso/:curso/usuarios/', UsuarioCurso.index);
+router.get('/curso/:curso/usuarios/', UsuarioCurso.verPorCurso);
 
 
 

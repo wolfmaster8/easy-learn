@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import { Badge, Button, Card, Col, Divider, Progress, Tooltip, Skeleton, Icon, message, Popconfirm } from "antd";
 import {Link} from 'react-router-dom'
 import api from "../services/api";
+import {get} from 'lodash';
 import {
   withRouter
 } from 'react-router-dom';
@@ -14,7 +15,7 @@ import {
     cursoInfo: {},
     actividades: [],
     loadingAct: true,
-  
+    usuariosInscritos: []
   };
   }
   async componentDidMount(){
@@ -22,7 +23,12 @@ import {
         const {cursos} = this.props;
         this.setState({cursoInfo: cursos});
         const actividades = await api.get(`/curso/${cursos.id_curso}/actividades`);
-        this.setState({actividades: actividades.data, loadingAct: false});
+        this.setState({actividades: actividades.data});
+        api.get(`/curso/${cursos.id_curso}/usuarios`)
+            .then((response)=>{
+                // console.log(response.data)
+                this.setState({usuariosInscritos: response.data, loadingAct: false})
+            })
       }else{
     const {id_curso} = this.props.info;
 
@@ -30,7 +36,9 @@ import {
         this.setState({cursoInfo: curso.data[0]});
         const actividades = await api.get(`/curso/${id_curso}/actividades`);
         this.setState({actividades: actividades.data, loadingAct: false});
-      }  
+
+
+      }
   }
 
   countActivities = (actividades) => {
@@ -59,7 +67,7 @@ import {
     message.info('Uhh... casi...')
   };
   render(){
-    const {nota, cursoInfo, actividades, loadingAct} = this.state;
+    const {nota, cursoInfo, actividades, loadingAct, usuariosInscritos} = this.state;
     return(
       <Fragment>
         <Col span={8} style={{marginBottom: 40}}>
@@ -68,7 +76,7 @@ import {
             title={cursoInfo.titulo ? cursoInfo.titulo : <Skeleton/>}
             extra={<Button type="primary"><Link to={`/cursos/${cursoInfo.id_curso}/actividades/new`}>Editar</Link></Button>
           }
-          actions={[/*<Icon type="edit"/>*/'',
+          actions={[ <Link to={`/inscribir/curso/${cursoInfo.id_curso}`}><Icon type="user" /></Link>,
             <Link to={`/ver/curso/${cursoInfo.id_curso}`}><Icon type="eye" /></Link>,
            <Popconfirm placement="topRight" title="¿Seguro que deseas eliminar este curso?" onConfirm={this.deleteCurso} onCancel={this.cancel} okText="Sí" cancelText="No">
           <Icon type="close-circle" />
@@ -76,7 +84,10 @@ import {
            ]}
           >
             <p>Actividades <Badge className="pull-right" style={{ backgroundColor: '#ff8a65' }} count={this.countActivities(actividades)} /></p>
-            {/*<Divider />
+            <p>Estudiantes <Badge className="pull-right" style={{ backgroundColor: '#ff8a65' }} count={get(usuariosInscritos, 'length', 'No hay')} /></p>
+              <Divider />
+
+              {/*
             <h4 className="text-center">Próxima Entrega</h4>
             <p className="text-center"><Badge status="processing" />18 de Noviembre</p>*/}
             {this.props.info && 
