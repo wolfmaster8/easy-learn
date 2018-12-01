@@ -3,7 +3,7 @@ import api from '../services/api';
 import {Link} from 'react-router-dom';
 
 import {Layout, Card, Row, Col, Badge, Divider, Progress, Tooltip, Button, Skeleton,  Breadcrumb} from "antd";
-import CursoInfo from "../components/CursoInfo";
+import CursoInfo from "../components/list-itens/CursoInfo";
 import SpinGral from "../components/SpinGral";
 const { Content } = Layout;
 

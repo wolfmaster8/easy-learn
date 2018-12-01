@@ -8,3 +8,4 @@ export {default as ActividadAdd} from './ActividadAdd';
 export {default as SubActividadAdd} from './SubActividadAdd';
 export {default as Demo} from './Demo';
 export {default as UsuarioCursoAdd} from './UsuarioCursoAdd';
+export {default as CursoEditar} from './CursoEditar';
