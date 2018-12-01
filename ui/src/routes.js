@@ -23,6 +23,10 @@ const Routes = () => (
         <pages.SubActividadAdd timestamp={new Date().toString()} {...props}/>
       )}/>
       <Route path="/cursos/usuario/:id" component={pages.CursoUsuario}/>
+
+      {/* Asociaciones */}
+        <Route path="/inscribir/curso/:id" component={pages.UsuarioCursoAdd}/>
+
       <Redirect to="/"/>
     </Switch>
   </Fragment>

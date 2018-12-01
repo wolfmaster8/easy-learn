@@ -14,8 +14,10 @@ export default class UsuarioInfo extends Component{
   
   async componentDidMount(){
     const {user} = this.props;
-    const response = await api.get(`/usuario/${user.id_usuario}/cursos`);
-    this.setState({cursos: response.data});
+    await api.get(`/usuario/${user.id_usuario}/cursos`)
+      .then((response)=>{
+        this.setState({cursos: response.data});
+      })
   }
   deleteUser = async () => {
     const {user} = this.props;
@@ -30,7 +32,6 @@ export default class UsuarioInfo extends Component{
   const {cursos} = this.state;
     return(
       <List.Item actions={[
-        <Link disabled to={`/usuario/${user.id_usuario}/asignar/cursos/`}>Asignar Cursos</Link>,
         <Link disabled to={`/usuario/editar/${user.id_usuario}`}>Editar</Link>,
         <Popconfirm title="¿Seguro que deseas eliminar este usuario?" onConfirm={this.deleteUser} onCancel={this.cancel} okText="Sí" cancelText="No">
           <Button type="danger">Eliminar</Button>

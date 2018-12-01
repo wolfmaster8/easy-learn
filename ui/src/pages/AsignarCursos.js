@@ -1,8 +1,12 @@
 import React, { Fragment } from 'react';
 import api from '../services/api';
-import {Layout, Card, Row, Col, Badge, Divider, Progress, Tooltip, Button} from "antd";
+import {Layout, Card, Row, Col, Badge, Divider, Progress, Tooltip, Button, Icon} from "antd";
 import CursoInfo from "../components/CursoInfo";
 import SpinGral from "../components/SpinGral";
+import {Menu} from "antd/lib/menu";
+import {Link} from "react-router-dom";
+import Sider from "antd/es/layout/Sider";
+import SidebarCursos from "../containers/SidebarCursos";
 const { Content } = Layout;
 
 
@@ -17,8 +21,8 @@ export default class AsignarCursos extends React.Component{
     }
   }
   async componentDidMount() {
-    const { id } = this.props.match.params;
-    const cursos = await api.get(`/usuario/${id}/cursos`);
+    this.id = this.props.match.params;
+    const cursos = await api.get(`/usuario/${this.id}/cursos`);
     this.setState({ cursos: cursos.data, loading:false});
   }
 

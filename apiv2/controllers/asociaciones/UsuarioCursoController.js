@@ -11,6 +11,29 @@ module.exports = {
       return res.json(rows);
     })
   },
+  async verPorUsarioCurso(req,res){
+    const user = req.params.user;
+    const curso = req.params.curso;
+    const query = "SELECT * FROM cursos_inscritos_assoc WHERE id_usuario=? AND id_curso=?";
+    db.query(query,[user, curso], (err, rows)=>{
+      if(err){
+        console.log(err);
+        res.end();
+      }
+      return res.json(rows);
+    })
+  },
+  async verPorCurso(req,res){
+    const curso = req.params.curso;
+    const query = "SELECT * FROM cursos_inscritos_assoc WHERE id_curso=?";
+    db.query(query,[curso], (err, rows)=>{
+      if(err){
+        console.log(err);
+        res.end();
+      }
+      return res.json(rows);
+    })
+  },
   async verPorUsuario(req,res){
     const user = req.params.user;
     const query = "SELECT * FROM cursos_inscritos_assoc WHERE id_usuario=?";
@@ -45,9 +68,10 @@ module.exports = {
     })
   },
   async delete(req, res){
-    const id = req.params.id;
-    const query = "DELETE FROM cursos_inscritos_assoc WHERE id=?"
-    db.query(query, [id], (err, rows)=>{
+    const usuario = req.params.user;
+    const curso = req.params.curso;
+    const query = "DELETE FROM cursos_inscritos_assoc WHERE id_usuario=? AND id_curso=?"
+    db.query(query, [usuario, curso], (err, rows)=>{
       return res.send(rows);
     })
   }
