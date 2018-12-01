@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import api from '../services/api';
+import api from '../../services/api';
 import Link from "react-router-dom/es/Link";
 import { Button, List, message, Popconfirm } from "antd";
-import CursosBadges from "./CursosBadges";
+import CursosBadges from "../CursosBadges";
 
 export default class UsuarioInfo extends Component{
   constructor( props ) {

@@ -4,7 +4,7 @@ import {withRouter} from "react-router-dom";
 import SpinGral from "../components/SpinGral";
 import api from "../services/api";
 import CursoEditForm from "../components/forms/CursoEditForm";
-import ActividadEdit from "../components/ActividadEdit";
+import ActividadEdit from "../components/list-itens/ActividadEdit";
 
 const {Content} = Layout;
 
@@ -44,8 +44,8 @@ class CursoEditar extends React.Component {
                             <CursoEditForm cursoInfo={cursoInfo} idCurso={this.id} />
                         </Col>
                         <Col span={24}>
-                            <List header={<h3>Actividades</h3>} bordered itemLayout="horizontal" dataSource={actividades} renderItem={item => (
-                                <ActividadEdit actividad={item} />
+                            <List header={<h3>Actividades</h3>} bordered itemLayout="horizontal" dataSource={actividades} renderItem={(item, i) => (
+                                <ActividadEdit key={i} actividad={item} />
                             )}/>
                         </Col>
                     </Row>

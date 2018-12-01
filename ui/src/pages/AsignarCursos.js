@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import api from '../services/api';
 import {Layout, Card, Row, Col, Badge, Divider, Progress, Tooltip, Button, Icon} from "antd";
-import CursoInfo from "../components/CursoInfo";
+import CursoInfo from "../components/list-itens/CursoInfo";
 import SpinGral from "../components/SpinGral";
 import {Menu} from "antd/lib/menu";
 import {Link} from "react-router-dom";

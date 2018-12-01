@@ -17,7 +17,7 @@ export const eliminada = (item, genero) => {
 
 export const saving = () => {
     message.destroy();
-    message.loading('Guardando...');
+    message.loading('Guardando...', 0);
 };
 
 export const error = (err) => {

@@ -5,7 +5,7 @@ import { Layout, Row, Col, List, Button, Divider, Form, Drawer, Input, Icon, Sel
 import Breadcrumb from "antd/es/breadcrumb/Breadcrumb";
 // import Link from "react-router-dom/es/Link";
 // import socket from 'socket.io-client';
-import UsuarioInfo from "../components/UsuarioInfo";
+import UsuarioInfo from "../components/list-itens/UsuarioInfo";
 import CursosAutocomplete from "../components/CursosAutocomplete";
 import * as ReactDOM from "react";
 import UsuarioForm from "../components/forms/UsuarioForm";

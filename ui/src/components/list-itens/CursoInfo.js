@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import { Badge, Button, Card, Col, Divider, Progress, Tooltip, Skeleton, Icon, message, Popconfirm } from "antd";
 import {Link} from 'react-router-dom'
-import api from "../services/api";
+import api from "../../services/api";
 import {get} from 'lodash';
 import {
   withRouter

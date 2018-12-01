@@ -4,48 +4,37 @@ import api from '../../services/api';
 import {
   withRouter
 } from 'react-router-dom';
+import * as notif from '../Notificaciones'
 const Option = Select.Option;
 const {TextArea} = Input;
 
  class SubActividadAddForm extends React.Component{
+     constructor(props) {
+         super(props);
+     }
 
 
-
-
-   handleSubmit = async e => {
+     handleSubmit = async e => {
     e.preventDefault();
-    this.saving();
-     const {curso, actividad} = this.props;
+    notif.saving();
+     let {curso, actividad} = this.props;
      // console.log(curso);
      await this.props.form.validateFields((err, values) => {
       if (!err) {
-        values["id_actividad"] = parseInt(actividad.id_actividad);
-        // console.log(values);
-        api.post(`/curso/${curso}/actividad/${actividad.id_actividad}/sub/`, values)
-            .then(()=>{
+        values["id_actividad"] = parseInt(actividad);
+        api.post(`/curso/${curso}/actividad/${actividad}/sub/`, values)
+            .then((response)=>{
                 message.destroy();
-                // console.log(response);
-                this.successGuardando();
-                this.props.history.push(`/cursos/${curso}/actividades/new`);
+                notif.success();
+                this.props.history.push(`/curso/${curso}/actividad/${actividad}/subactividad/new`);
             });
 
       }else{
-        this.errorGuardando();
+        notif.error(err)
       }
     });
   };
 
-   saving = ()=>{
-       message.loading("Guardando...")
-   };
-
-  successGuardando = () => {
-    message.success('Actividad Guardada con éxito');
-  };
-
-   errorGuardando = () =>{
-     message.error('Error Guardando');
-   };
 
    renderForm = (puntosMaximos)=>{
        const { getFieldDecorator } = this.props.form;

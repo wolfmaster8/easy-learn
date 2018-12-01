@@ -1,8 +1,9 @@
 import React from 'react';
 import {List, Button, Tooltip, Icon, Popconfirm, Modal} from "antd";
-import * as notif from './Notificaciones';
-import api from '../services/api';
-import ActividadEditForm from "./forms/ActividadEditForm";
+import * as notif from '../Notificaciones';
+import api from '../../services/api';
+import ActividadEditForm from "../forms/ActividadEditForm";
+import ModalSubactividades from "../ModalSubactividades";
 
 export default class ActividadEdit extends React.Component {
     constructor(props) {
@@ -10,12 +11,13 @@ export default class ActividadEdit extends React.Component {
         this.state = {
             deleted: false,
             deleting: false,
-            editing:false
+            editing:false,
+            modal: false
         }
     }
 
     editAct = () => {
-        this.setState({editing: true})
+        this.setState({editing: !this.state.editing})
     };
 
     deleteAct = async () =>{
@@ -28,25 +30,11 @@ export default class ActividadEdit extends React.Component {
             })
     };
 
-    renderModal = () =>{
 
-        return(
-            <Modal
-                title="Basic Modal"
-                visible={this.state.visible}
-                onOk={this.handleOk}
-                onCancel={this.handleCancel}
-            >
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-            </Modal>
-        )
-    };
 
     render() {
         const {actividad} = this.props;
-        const {deleting, deleted, editing} = this.state;
+        const {deleting, deleted, editing, modal} = this.state;
 
         if(deleting) return(
             <List.Item actions={[<p style={{color: '#d62424'}}><Icon type="sync" spin /> Eliminando</p>]} >
@@ -59,22 +47,24 @@ export default class ActividadEdit extends React.Component {
             </List.Item>
         );
         if(editing) return(
-            <List.Item style={{background: '#f5f5f5'}}  actions={[<p><Icon type="edit"  theme="twoTone" /> Editando</p>]} >
+            <List.Item style={{background: '#f5f5f5'}}  actions={[
+                <Button onClick={this.editAct}>
+                <Icon type="close" /> Cancelar
+            </Button>,
+            ]} >
                <ActividadEditForm info={actividad} />
             </List.Item>
         );
 
         return (
             <List.Item  actions={[
-                <Button onClick={this.renderModal}>
-                    <Icon type="file-sync" /> Editar Subactividades
-                </Button>,
-                <Tooltip title="Editar">
+                <ModalSubactividades actividad={actividad}/>,
+                <Tooltip key={2} title="Editar">
                     <Button onClick={this.editAct}>
                         <Icon type="edit" />
                     </Button>
                 </Tooltip>,
-                    <Popconfirm placement="topRight" title="¿Seguro que deseas eliminar esta actividad? Eliminarás las subactividades también" onConfirm={this.deleteAct} onCancel={notif.cancel} okText="Sí" cancelText="No">
+                    <Popconfirm key={3} placement="topRight" title="¿Seguro que deseas eliminar esta actividad? Eliminarás las subactividades también" onConfirm={this.deleteAct} onCancel={notif.cancel} okText="Sí" cancelText="No">
                     <Button type="danger">
                         <Icon type="delete" />
                     </Button>
@@ -82,9 +72,7 @@ export default class ActividadEdit extends React.Component {
                 ,
             ]}>
                 <List.Item.Meta title={`${actividad.titulo} ${actividad.puntos}`} description={actividad.descripcion}/>
-                {/*{cursos.map(curso=>(
-                    <CursosBadges key={curso.id} curso={curso}/>
-                ))}*/}
+
             </List.Item>
         )
     }
