@@ -49,7 +49,17 @@ import {
     }else{
       return numeroActividades;
     }
-  }
+  };
+
+  countEstudiantes = (estudiantes)=>{
+      let numero =  estudiantes.length;
+      if(numero === 0){
+          return "Sin Estudiantes"
+      }else{
+        return get(estudiantes, 'length', "No hay");
+      }
+  };
+
   renderNota(){
     // console.log('Ver nota');
     this.setState({nota: !this.state.nota});
@@ -73,18 +83,17 @@ import {
         <Col span={8} style={{marginBottom: 40}}>
           <Card
             loading={loadingAct}
-            title={cursoInfo.titulo ? cursoInfo.titulo : <Skeleton/>}
-            extra={<Button type="primary"><Link to={`/cursos/${cursoInfo.id_curso}/actividades/new`}>Editar</Link></Button>
-          }
-          actions={[ <Link to={`/inscribir/curso/${cursoInfo.id_curso}`}><Icon type="user" /></Link>,
-            <Link to={`/ver/curso/${cursoInfo.id_curso}`}><Icon type="eye" /></Link>,
+            title={cursoInfo.titulo ? <Link to={`/ver/curso/${cursoInfo.id_curso}`}>{cursoInfo.titulo}</Link> : <Skeleton/>}
+            extra={ <Tooltip title="Añadir Actividad & Subactividad"><Link to={`/cursos/${cursoInfo.id_curso}/actividades/new`}><Icon type="plus-circle" /></Link></Tooltip>}
+          actions={[ <Link to={`/inscribir/curso/${cursoInfo.id_curso}`}><Icon type="user-add" /></Link>,
+              <Link to={`/editar/curso/${cursoInfo.id_curso}`}><Icon type="edit" /></Link>,
            <Popconfirm placement="topRight" title="¿Seguro que deseas eliminar este curso?" onConfirm={this.deleteCurso} onCancel={this.cancel} okText="Sí" cancelText="No">
           <Icon type="close-circle" />
         </Popconfirm>
            ]}
           >
             <p>Actividades <Badge className="pull-right" style={{ backgroundColor: '#ff8a65' }} count={this.countActivities(actividades)} /></p>
-            <p>Estudiantes <Badge className="pull-right" style={{ backgroundColor: '#ff8a65' }} count={get(usuariosInscritos, 'length', 'No hay')} /></p>
+            <p>Estudiantes <Badge className="pull-right" style={{ backgroundColor: '#ff8a65' }} count={this.countEstudiantes(usuariosInscritos)} /></p>
               <Divider />
 
               {/*
