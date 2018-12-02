@@ -13,7 +13,7 @@ class FooterGral extends Component{
               <p className="text-left">All rights reserved 2018. Felipe Lobo & Alexis Chacón & Sergio Barón</p>
             </Col>
             <Col span={12}>
-              <p className="text-right">Versión 0.4a</p>
+              <p className="text-right">Versión 0.9a</p>
             </Col>
           </Row>
         </Footer>

@@ -40,17 +40,18 @@ export default class Demo extends React.Component {
       {
         title: 'Inicio de sesión',
         description: 'Inicio de sesión para administradores, estudiantes y profesores',
-        icon: <Icon type="sync" spin />,
+          icon: <Icon type="pause-circle" theme="twoTone" twoToneColor="#ffe58f" />
+
       },
       {
         title: 'CRUD Notas Estudiantes',
         description: 'Ver, editar y asignar nota a los estudiantes',
-        icon: <Icon type="pause-circle" theme="twoTone" twoToneColor="#ffe58f" />
+        icon:<Icon type="sync" spin />
       },
       {
         title: 'Editar Cursos',
         description: 'Editar cursos y su contenido (actividades y subactividades)',
-        icon: <Icon type="pause-circle" theme="twoTone" twoToneColor="#ffe58f" />
+        icon: <Icon type="check-circle" theme="twoTone" twoToneColor="#3BAC53" />
 
 
       },
@@ -61,18 +62,11 @@ export default class Demo extends React.Component {
 
 
       },
-      {
-        title: 'CRUD Mensajes',
-        description: 'Ver, enviar y eliminar mensajes',
-        icon: <Icon type="pause-circle" theme="twoTone" twoToneColor="#ffe58f" />
 
-
-      },
       {
         title: 'Rerender on Update',
         description: 'Actualizar la lista cuando es eliminado/creado un item.',
-        icon: <Icon type="sync" spin />,
-
+       icon: <Icon type="check-circle" theme="twoTone" twoToneColor="#3BAC53" />
 
 
       },
