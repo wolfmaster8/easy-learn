@@ -84,7 +84,7 @@ export default class SubActividadAdd extends React.Component {
             <Layout>
                 <SidebarActividad curso={infoCurso} actividades={actividades}/>
                 <SidebarSubActividad curso={infoCurso} subactividades={subactividades}/>
-                {loading ? <SpinGral text="Subactividades"/>
+                {loading ? <SpinGral text="Subactividades" size={690}/>
                     : (
                         <Content style={{background: '#fff', padding: 24, margin: 0, minHeight: 680}}>
                             <Row gutter={16}>

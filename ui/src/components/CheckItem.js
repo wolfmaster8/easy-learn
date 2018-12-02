@@ -3,6 +3,7 @@ import {Checkbox, message} from "antd";
 import {List} from "antd/lib/list";
 import api from "../services/api";
 import {get} from 'lodash';
+import * as notif from './Notificaciones'
 
 export default class CheckItem extends React.Component {
     constructor(props) {
@@ -36,13 +37,12 @@ export default class CheckItem extends React.Component {
     onChange = (e) => {
         const value = e.target.checked;
         const {estudiante} = this.props;
-        this.saving();
+        notif.saving();
         if (!value) {
             api.delete(`/usuario/${estudiante.id_usuario}/curso/${this.id}`)
                 .then(() => {
-                    message.destroy();
                     this.setState({checked: !this.state.checked});
-                    this.successEliminando()
+                    notif.eliminada('Usuario', 'm')
                 })
         } else {
             let usuario = e.target.value;
@@ -52,9 +52,8 @@ export default class CheckItem extends React.Component {
             };
             api.post(`/usuario/${data.id_usuario}/curso/`, data)
                 .then(() => {
-                    message.destroy();
                     this.setState({checked: !this.state.checked});
-                    this.successGuardando()
+                    notif.success();
                 })
         }
 

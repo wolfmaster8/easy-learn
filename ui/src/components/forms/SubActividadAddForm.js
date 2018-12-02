@@ -24,7 +24,6 @@ const {TextArea} = Input;
         values["id_actividad"] = parseInt(actividad);
         api.post(`/curso/${curso}/actividad/${actividad}/sub/`, values)
             .then((response)=>{
-                message.destroy();
                 notif.success();
                 this.props.history.push(`/curso/${curso}/actividad/${actividad}/subactividad/new`);
             });

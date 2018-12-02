@@ -36,7 +36,7 @@ export default class CursosBadges extends Component{
   
   render(){
     const {cursoInfo, loading} = this.state;
-    if(loading) return <SpinGral/>;
+    if(loading) return <SpinGral size={690}/>;
     return(
       <Fragment>
         {this.renderCurso()}

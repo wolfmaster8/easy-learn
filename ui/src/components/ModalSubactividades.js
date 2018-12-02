@@ -43,7 +43,7 @@ export default class ModalSubactividades extends React.Component {
                     footer={null}
                     destroyOnClose={true}
                 >
-                    {loading ? <SpinGral text="Subactividades"/>
+                    {loading ? <SpinGral text="Subactividades" size={690}/>
                         : (
                             <List itemLayout="horizontal"
                                   dataSource={subactividades} renderItem={(item, i) => (

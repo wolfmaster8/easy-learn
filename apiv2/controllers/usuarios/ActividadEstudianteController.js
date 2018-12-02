@@ -13,14 +13,14 @@ module.exports = {
     })
   },
   async verNota(req, res){
-    const usuario = req.params.user;
-    const id = req.params.id;
-    const query = "SELECT * FROM actividad_estudiante WHERE id_act_est=? AND id_usuario=?";
-    db.query(query, [id, usuario], (err, rows)=>{
+      const act = req.params.act;
+      const usuario = req.params.user;
+    const query = "SELECT * FROM actividad_estudiante WHERE id_actividad=? AND id_usuario=?";
+    db.query(query, [act, usuario], (err, rows)=>{
       return res.json(rows);
     })
   },
-  async asignarNota(req, res){
+  async asignarNuevaNota(req, res){
     const data = req.body;
     const query = "INSERT INTO actividad_estudiante SET ?";
     db.query(query, [data], (err, rows)=>{
@@ -33,6 +33,9 @@ module.exports = {
   },
   async editarNota(req, res){
     const id = req.params.id;
+    const id_actividad = req.body.id_actividad;
+    const id_usuario = req.body.id_usuario;
+    const puntos = req.body.puntos;
     const dataUpdate = req.body;
     const query = "UPDATE actividad_estudiante SET ? WHERE id_act_est=?";
     db.query(query,[dataUpdate, id], (err, rows)=>{
@@ -42,4 +45,11 @@ module.exports = {
       return res.send(rows);
     })
   },
+    async delete(req, res){
+        const id = req.params.id;
+        const query = "DELETE FROM actividad_estudiante WHERE id_act_est=?"
+        db.query(query, [id], (err, rows)=>{
+            return res.send(rows);
+        })
+    }
 };

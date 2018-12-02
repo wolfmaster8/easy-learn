@@ -30,6 +30,8 @@ const Routes = () => (
 
             <Route path="/cursos/usuario/:id" component={pages.CursoUsuario}/>
 
+            <Route path="/notas/curso/:id" component={pages.NotasUsuarios}/>
+
             {/* Asociaciones */}
             <Route path="/inscribir/curso/:id" component={pages.UsuarioCursoAdd}/>
 

@@ -12,6 +12,7 @@ const TabPane = Tabs.TabPane;
 class CursoVer extends Component {
     constructor(props) {
         super(props);
+        this.id = this.props.match.params.id;
         this.state = {
             cursoInfo: {},
             actividades: [],
@@ -22,7 +23,6 @@ class CursoVer extends Component {
     }
 
     async componentDidMount() {
-        this.id = this.props.match.params.id;
         const response = await api.get(`/curso/${this.id}`);
         /* get PROFESOR */
         const profesor = await api.get(`/usuario/${response.data[0].id_profesor}`);
@@ -52,7 +52,6 @@ class CursoVer extends Component {
                         <SubactividadShow cursoID={cursoInfo.id_curso} actividadID={act.id_actividad}/>
                     </TabPane>
                 ))}
-                <TabPane disabled={true} tab="Mis Notas" key="328">Mis Notas</TabPane>
 
             </Tabs>
         );
@@ -60,21 +59,24 @@ class CursoVer extends Component {
 
     render() {
         const {loading, cursoInfo, profesor} = this.state;
-        if (loading) return <SpinGral/>;
         return (
             <Layout>
-                <SidebarCursos idCurso={this.id} />
-                <Content style={{background: '#fff', padding: 24, margin: 0, minHeight: 680}}>
-                    <Row gutter={16}>
-                        <Col span={12}>
-                            <h2>{cursoInfo.titulo}</h2>
-                            <p><b>Profesor:</b> {profesor}</p>
-                        </Col>
-                    </Row>
+                <SidebarCursos idCurso={this.id} selected={1} />
+                {loading ? <SpinGral text="Contenido del Curso" size={690}/>
+                : (
+                        <Content style={{background: '#fff', padding: 24, margin: 0, minHeight: 680}}>
+                            <Row gutter={16}>
+                                <Col span={12}>
+                                    <h2>{cursoInfo.titulo}</h2>
+                                    <p><b>Profesor:</b> {profesor}</p>
+                                </Col>
+                            </Row>
 
-                    {this.renderActividades()}
+                            {this.renderActividades()}
 
-                </Content>
+                        </Content>
+                    )}
+
             </Layout>
         )
     }

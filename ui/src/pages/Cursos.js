@@ -30,7 +30,7 @@ export default class Cursos extends React.Component{
   
   render(){
     const { cursos, loading, loadingAct} = this.state;
-    if(loading) return <SpinGral/>;
+    if(loading) return <SpinGral size={690}/>;
     return(
       <Layout>
         <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 680 }}>
