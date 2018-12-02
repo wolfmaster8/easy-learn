@@ -9,7 +9,7 @@ export default class SpinGral extends Component {
     render() {
         return (
             <Layout>
-                <Content style={{background: '#fff', padding: 24, margin: 0, minHeight: 680}}>
+                <Content style={{background: '#fff', padding: 24, margin: 0, minHeight: get(this.props, 'size', 100)}}>
                     <div className="spin">
                         <Spin size={"large"} style={{color: '#3BAC53'}} indicator={loaderIcon}/>
                         <p>Cargando {get(this.props, 'text', '')}</p>

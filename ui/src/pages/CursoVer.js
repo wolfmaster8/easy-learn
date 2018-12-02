@@ -52,7 +52,6 @@ class CursoVer extends Component {
                         <SubactividadShow cursoID={cursoInfo.id_curso} actividadID={act.id_actividad}/>
                     </TabPane>
                 ))}
-                <TabPane disabled={true} tab="Mis Notas" key="328">Mis Notas</TabPane>
 
             </Tabs>
         );
@@ -63,7 +62,7 @@ class CursoVer extends Component {
         return (
             <Layout>
                 <SidebarCursos idCurso={this.id} selected={1} />
-                {loading ? <SpinGral text="Contenido del Curso"/>
+                {loading ? <SpinGral text="Contenido del Curso" size={690}/>
                 : (
                         <Content style={{background: '#fff', padding: 24, margin: 0, minHeight: 680}}>
                             <Row gutter={16}>

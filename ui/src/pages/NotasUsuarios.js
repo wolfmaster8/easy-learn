@@ -30,7 +30,7 @@ export default class NotasUsuarios extends React.Component {
         return (
             <Layout>
                 <SidebarCursos idCurso={this.id} selected={3}/>
-                {loading ? <SpinGral text="Usuarios"/>
+                {loading ? <SpinGral text="Usuarios" size={690}/>
                     : (
                         <Content style={{background: '#fff', padding: 24, margin: 0, minHeight: 680}}>
                             <Row gutter={16}>

@@ -31,9 +31,10 @@ router.delete('/curso/:curso/actividad/:act', ActividadController.delete);
 /* ACTIVIDAD -> ESTUDIANTE */
 const ActividadEstudiante = require('./controllers/usuarios/ActividadEstudianteController');
 router.get('/nota/usuario/:user/actividad/', ActividadEstudiante.verNotasTodas);
-router.get('/nota/usuario/:user/actividad/:id', ActividadEstudiante.verNota);
-router.post('/nota/usuario/:user/actividad/:act', ActividadEstudiante.asignarNota);
+router.get('/nota/usuario/:user/actividad/:act', ActividadEstudiante.verNota);
+router.post('/nota/usuario/:user/actividad/:act', ActividadEstudiante.asignarNuevaNota);
 router.post('/nota/usuario/:user/actividad/:id/update', ActividadEstudiante.editarNota);
+router.delete('/nota/actividad/:id/delete', ActividadEstudiante.delete);
 
 /* SUBACTIVIDAD*/
 const SubactividadController = require('./controllers/cursos/SubactividadController');
@@ -46,9 +47,11 @@ router.delete('/subactividad/:id/delete', SubactividadController.delete);
 /* SUBACTIVIDAD -> ACTIVIDAD */
 const SubactividadEstudiantesController = require('./controllers/usuarios/SubactividadEstudiantesController');
 router.get('/nota/usuario/:user/actividad/:act/subactividades/', SubactividadEstudiantesController.verNotasTodas);
-router.get('/ver/nota/usuario/:user/sub/:sub', SubactividadEstudiantesController.verNota);
-router.post('/asignar/nota/sub/:sub', SubactividadEstudiantesController.asignarNota);
+router.get('/ver/nota/usuario/:user/sub/:subact', SubactividadEstudiantesController.verNota);
+router.post('/asignar/nota/sub/:subact', SubactividadEstudiantesController.asignarNota);
 router.post('/nota/usuario/:user/actividad/:act/sub/:id/update', SubactividadEstudiantesController.editarNota);
+router.delete('/nota/subactividad/:id/delete', SubactividadEstudiantesController.delete);
+
 
 /* MENSAJES */
 const Mensajes = require('./controllers/usuarios/MensajesController');

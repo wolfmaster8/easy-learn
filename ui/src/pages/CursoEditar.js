@@ -35,7 +35,7 @@ class CursoEditar extends React.Component {
     render() {
         // const {} = this.props;
         const {loading, cursoInfo, actividades} = this.state;
-        if(loading) return <SpinGral text="Actividades"/>;
+        if(loading) return <SpinGral text="Actividades" size={690}/>;
         return (
             <Layout>
                 <Content style={{background: '#fff', padding: 24, margin: 0, minHeight: 680}}>

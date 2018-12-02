@@ -32,7 +32,7 @@ class UsuarioCursoAdd extends Component {
             <Layout>
                 <SidebarCursos idCurso={this.id} selected={2}/>
 
-                {loading ? <SpinGral text="Inscritos"/>
+                {loading ? <SpinGral text="Inscritos" size={690}/>
                 : (
                         <Content style={{background: '#fff', padding: 24, margin: 0, minHeight: 680}}>
                             <Row gutter={16}>

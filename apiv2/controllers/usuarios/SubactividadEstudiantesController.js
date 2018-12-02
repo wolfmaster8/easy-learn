@@ -14,7 +14,7 @@ module.exports = {
     })
   },
   async verNota(req, res){
-    const sub = req.params.sub;
+    const sub = req.params.subact;
     const user = req.params.user;
     const query = "SELECT * FROM subactividad_estudiante WHERE id_subactividad=? AND id_usuario=?";
     db.query(query, [sub, user], (err, rows)=>{
@@ -43,4 +43,11 @@ module.exports = {
       return res.send(rows);
     })
   },
+    async delete(req, res){
+        const id = req.params.id;
+        const query = "DELETE FROM subactividad_estudiante WHERE id_sub_est=?";
+        db.query(query, [id], (err, rows)=>{
+            return res.send(rows);
+        })
+    }
 };
