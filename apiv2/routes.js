@@ -46,8 +46,8 @@ router.delete('/subactividad/:id/delete', SubactividadController.delete);
 /* SUBACTIVIDAD -> ACTIVIDAD */
 const SubactividadEstudiantesController = require('./controllers/usuarios/SubactividadEstudiantesController');
 router.get('/nota/usuario/:user/actividad/:act/subactividades/', SubactividadEstudiantesController.verNotasTodas);
-router.get('/nota/usuario/:user/actividad/:act/sub/:id', SubactividadEstudiantesController.verNota);
-router.post('/nota/usuario/:user/actividad/:act/sub/', SubactividadEstudiantesController.asignarNota);
+router.get('/ver/nota/usuario/:user/sub/:sub', SubactividadEstudiantesController.verNota);
+router.post('/asignar/nota/sub/:sub', SubactividadEstudiantesController.asignarNota);
 router.post('/nota/usuario/:user/actividad/:act/sub/:id/update', SubactividadEstudiantesController.editarNota);
 
 /* MENSAJES */

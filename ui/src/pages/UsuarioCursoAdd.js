@@ -27,23 +27,22 @@ class UsuarioCursoAdd extends Component {
     }
 
     render() {
-        const {usuarios, loading, checked} = this.state;
-        if (loading) return <SpinGral/>;
+        const {estudiantes, loading, checked} = this.state;
         return (
             <Layout>
-                <SidebarCursos idCurso={this.id} />
+                <SidebarCursos idCurso={this.id} selected={2}/>
 
+                {loading ? <SpinGral text="Inscritos"/>
+                : (
+                        <Content style={{background: '#fff', padding: 24, margin: 0, minHeight: 680}}>
+                            <Row gutter={16}>
+                                <Col span={24}>
+                                    <ListCheck curso={this.id}/>
+                                </Col>
+                            </Row>
+                        </Content>
+                    )}
 
-                <Content style={{background: '#fff', padding: 24, margin: 0, minHeight: 680}}>
-                    <Row gutter={16}>
-                        <Col span={24}>
-                            {/* {usuarios.map((user, i)=>(
-                            <Checkbox key={i} checked={checked} value={user.id_usuario} onChange={this.onChange}>{user.nombre} {user.apellido}</Checkbox>
-                        ))}*/}
-                            <ListCheck curso={this.id}/>
-                        </Col>
-                    </Row>
-                </Content>
             </Layout>
         )
     }

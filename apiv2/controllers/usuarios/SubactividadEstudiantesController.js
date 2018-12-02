@@ -4,7 +4,7 @@ module.exports = {
   async verNotasTodas(req,res){
     const usuario = req.params.user;
     const actividad = req.params.act;
-    const query = "SELECT * FROM subactividad_estudiante WHERE id_usuario=? AND id_actividad=?";
+    const query = "SELECT * FROM subactividad_estudiante WHERE id_usuario=? AND id_subactividad=?";
     db.query(query,[usuario, actividad], (err, rows)=>{
       if(err){
         console.log(err);
@@ -14,11 +14,10 @@ module.exports = {
     })
   },
   async verNota(req, res){
-    const usuario = req.params.user;
-    const actividad = req.params.act;
-    const id = req.params.id;
-    const query = "SELECT * FROM subactividad_estudiante WHERE id_sub_est=? AND id_actividad=? AND id_usuario=?";
-    db.query(query, [id, actividad, usuario], (err, rows)=>{
+    const sub = req.params.sub;
+    const user = req.params.user;
+    const query = "SELECT * FROM subactividad_estudiante WHERE id_subactividad=? AND id_usuario=?";
+    db.query(query, [sub, user], (err, rows)=>{
       return res.json(rows);
     })
   },
